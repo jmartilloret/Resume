@@ -1,85 +1,114 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es" class=""> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu Nombre - Currículum</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Puedes añadir CSS personalizado aquí si es necesario, pero Tailwind se encarga de la mayoría */
+        /* Estilos base y personalizados */
         body {
-            font-family: 'Inter', sans-serif; /* Fuente limpia por defecto con Tailwind */
+            font-family: 'Inter', sans-serif;
+            /* Transición suave para el cambio de color de fondo */
+            @apply transition-colors duration-300 ease-in-out;
         }
-        /* Estilo para enlaces */
+        /* Estilo para enlaces en modo claro */
         a {
-            color: #2563eb; /* Azul de Tailwind */
-            text-decoration: none;
+            @apply text-blue-600 hover:underline;
         }
-        a:hover {
-            text-decoration: underline;
+        /* Estilo para enlaces en modo oscuro */
+        .dark a {
+             @apply text-blue-400 hover:underline;
         }
         /* Estilo opcional para mejorar la impresión */
         @media print {
             body {
-                -webkit-print-color-adjust: exact; /* Mantiene colores de fondo al imprimir */
+                -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
             .no-print {
-                display: none; /* Oculta elementos no deseados al imprimir */
+                display: none;
             }
+            /* Forzar fondo blanco y texto negro al imprimir */
+            body, .resume-container {
+                 background-color: #ffffff !important;
+                 color: #000000 !important;
+            }
+            header {
+                 background-color: #1f2937 !important; /* Mantener cabecera oscura si se desea */
+                 color: #ffffff !important;
+            }
+            header a {
+                color: #ffffff !important;
+            }
+            section h2 {
+                border-color: #d1d5db !important; /* Borde gris claro */
+            }
+            .dark section h2 {
+                 border-color: #4b5563 !important; /* Borde gris oscuro */
+            }
+             span.skill-tag {
+                background-color: #e5e7eb !important; /* Fondo gris claro para etiquetas */
+                color: #1f2937 !important; /* Texto oscuro para etiquetas */
+             }
+        }
+        /* Iconos SVG para el toggle (simplificado) */
+        .icon {
+            display: inline-block;
+            width: 1.25em;
+            height: 1.25em;
+            stroke-width: 1.5;
+            stroke: currentColor;
+            fill: none;
+            vertical-align: middle;
         }
     </style>
     <link rel="preconnect" href="https://rsms.me/">
-     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-     <script>
-        // Configuración opcional de Tailwind (si necesitas personalizar temas)
-        // tailwind.config = {
-        //   theme: {
-        //     extend: {
-        //       colors: {
-        //         clifford: '#da373d',
-        //       }
-        //     }
-        //   }
-        // }
-      </script>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 </head>
-<body class="bg-gray-100 p-4 md:p-8 lg:p-12">
+<body class="bg-gray-100 dark:bg-gray-900 p-4 md:p-8 lg:p-12">
 
-    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-        <header class="bg-gray-800 text-white p-6 md:p-8 text-center">
+    <div class="resume-container max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden relative">
+
+        <button id="theme-toggle" type="button" class="no-print absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 transition-colors duration-200">
+            <svg id="theme-toggle-dark-icon" class="icon hidden" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 008.307-4.498z" />
+            </svg>
+            <svg id="theme-toggle-light-icon" class="icon hidden" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+            </svg>
+        </button>
+
+        <header class="bg-gray-800 dark:bg-gray-900 text-white p-6 md:p-8 text-center">
             <h1 class="text-3xl md:text-4xl font-bold">Tu Nombre Completo</h1>
-            <p class="text-lg md:text-xl text-gray-300 mt-1">Título Profesional / Rol Deseado</p>
-            <div class="mt-4 text-sm md:text-base text-gray-400 flex flex-wrap justify-center gap-x-4 gap-y-2">
-                <span><a href="mailto:tu.email@ejemplo.com" class="hover:text-white">tu.email@ejemplo.com</a></span>
-                <span>|</span>
-                <span><a href="tel:+1234567890" class="hover:text-white">(123) 456-7890</a></span>
-                <span>|</span>
+            <p class="text-lg md:text-xl text-gray-300 dark:text-gray-400 mt-1">Título Profesional / Rol Deseado</p>
+            <div class="mt-4 text-sm md:text-base text-gray-400 dark:text-gray-500 flex flex-wrap justify-center gap-x-4 gap-y-2">
+                <span><a href="mailto:tu.email@ejemplo.com" class="text-blue-300 dark:text-blue-400 hover:text-white dark:hover:text-blue-300">tu.email@ejemplo.com</a></span>
+                <span class="hidden sm:inline">|</span>
+                <span><a href="tel:+1234567890" class="text-blue-300 dark:text-blue-400 hover:text-white dark:hover:text-blue-300">(123) 456-7890</a></span>
+                <span class="hidden sm:inline">|</span>
                 <span>Tu Ciudad, País</span>
-                <span>|</span>
-                <span><a href="https://www.linkedin.com/in/tu-perfil/" target="_blank" rel="noopener noreferrer" class="hover:text-white">LinkedIn</a></span>
-                <span>|</span>
-                <span><a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" class="hover:text-white">GitHub</a></span>
+                <span class="hidden sm:inline">|</span>
+                <span><a href="https://www.linkedin.com/in/tu-perfil/" target="_blank" rel="noopener noreferrer" class="text-blue-300 dark:text-blue-400 hover:text-white dark:hover:text-blue-300">LinkedIn</a></span>
+                <span class="hidden sm:inline">|</span>
+                <span><a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" class="text-blue-300 dark:text-blue-400 hover:text-white dark:hover:text-blue-300">GitHub</a></span>
                 </div>
         </header>
 
-        <main class="p-6 md:p-8">
+        <main class="p-6 md:p-8 text-gray-700 dark:text-gray-300">
 
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4">Resumen Profesional</h2>
-                <p class="text-gray-600 leading-relaxed">
+                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-700 pb-2 mb-4">Resumen Profesional</h2>
+                <p class="leading-relaxed">
                     Desarrollador [Tu Especialidad] con X años de experiencia en [Tecnologías Clave]. Apasionado por crear soluciones eficientes y escalables. Buscando una oportunidad desafiante en [Tipo de Empresa o Industria] donde pueda aplicar mis habilidades en [Habilidad 1] y [Habilidad 2].
                 </p>
             </section>
 
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4">Experiencia Laboral</h2>
+                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-700 pb-2 mb-4">Experiencia Laboral</h2>
 
                 <article class="mb-6">
-                    <h3 class="text-xl font-semibold text-gray-800">Nombre del Puesto</h3>
-                    <p class="text-md text-gray-600">Nombre de la Empresa | Ciudad, País</p>
-                    <p class="text-sm text-gray-500 italic">Mes Año Inicio – Mes Año Fin (o "Presente")</p>
-                    <ul class="list-disc list-inside mt-2 text-gray-600 leading-relaxed space-y-1">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Nombre del Puesto</h3>
+                    <p class="text-md text-gray-600 dark:text-gray-400">Nombre de la Empresa | Ciudad, País</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Mes Año Inicio – Mes Año Fin (o "Presente")</p>
+                    <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-gray-600 dark:text-gray-400">
                         <li>Logro o responsabilidad clave 1. Utilicé [Tecnología/Habilidad] para [Resultado Cuantificable si es posible].</li>
                         <li>Logro o responsabilidad clave 2. Colaboré con equipos para [Acción].</li>
                         <li>Logro o responsabilidad clave 3. Desarrollé e implementé [Característica/Proyecto].</li>
@@ -87,10 +116,10 @@
                 </article>
 
                 <article class="mb-6">
-                    <h3 class="text-xl font-semibold text-gray-800">Nombre del Puesto Anterior</h3>
-                    <p class="text-md text-gray-600">Nombre de la Empresa Anterior | Ciudad, País</p>
-                    <p class="text-sm text-gray-500 italic">Mes Año Inicio – Mes Año Fin</p>
-                    <ul class="list-disc list-inside mt-2 text-gray-600 leading-relaxed space-y-1">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Nombre del Puesto Anterior</h3>
+                    <p class="text-md text-gray-600 dark:text-gray-400">Nombre de la Empresa Anterior | Ciudad, País</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Mes Año Inicio – Mes Año Fin</p>
+                    <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-gray-600 dark:text-gray-400">
                         <li>Logro o responsabilidad clave 1.</li>
                         <li>Logro o responsabilidad clave 2.</li>
                         </ul>
@@ -99,26 +128,26 @@
                 </section>
 
              <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4">Proyectos Destacados</h2>
+                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-700 pb-2 mb-4">Proyectos Destacados</h2>
 
                 <article class="mb-6">
-                    <h3 class="text-xl font-semibold text-gray-800">
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
                         Nombre del Proyecto 1
-                        <span class="text-sm font-normal text-blue-600 ml-2">[<a href="URL_DEL_PROYECTO_O_REPO" target="_blank" rel="noopener noreferrer">Ver Proyecto/Código</a>]</span>
+                        <span class="text-sm font-normal ml-2">[<a href="URL_DEL_PROYECTO_O_REPO" target="_blank" rel="noopener noreferrer">Ver Proyecto/Código</a>]</span>
                     </h3>
-                    <p class="text-sm text-gray-500 italic">Tecnologías Utilizadas: [Tecnología 1, Tecnología 2, ...]</p>
-                    <p class="mt-2 text-gray-600 leading-relaxed">
+                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Tecnologías Utilizadas: [Tecnología 1, Tecnología 2, ...]</p>
+                    <p class="mt-2 leading-relaxed text-gray-600 dark:text-gray-400">
                         Descripción concisa del proyecto, el problema que resuelve y tu rol en él. Destaca las características principales o los desafíos técnicos superados.
                     </p>
-                </article>
+                    </article>
 
                 <article class="mb-6">
-                     <h3 class="text-xl font-semibold text-gray-800">
+                     <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
                         Nombre del Proyecto 2
-                        <span class="text-sm font-normal text-blue-600 ml-2">[<a href="URL_DEL_PROYECTO_O_REPO" target="_blank" rel="noopener noreferrer">Ver Proyecto/Código</a>]</span>
+                        <span class="text-sm font-normal ml-2">[<a href="URL_DEL_PROYECTO_O_REPO" target="_blank" rel="noopener noreferrer">Ver Proyecto/Código</a>]</span>
                     </h3>
-                    <p class="text-sm text-gray-500 italic">Tecnologías Utilizadas: [Tecnología 1, Tecnología 2, ...]</p>
-                    <p class="mt-2 text-gray-600 leading-relaxed">
+                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Tecnologías Utilizadas: [Tecnología 1, Tecnología 2, ...]</p>
+                    <p class="mt-2 leading-relaxed text-gray-600 dark:text-gray-400">
                         Descripción concisa del proyecto.
                     </p>
                 </article>
@@ -126,50 +155,123 @@
                 </section>
 
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4">Educación</h2>
+                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-700 pb-2 mb-4">Educación</h2>
 
                 <article class="mb-4">
-                    <h3 class="text-xl font-semibold text-gray-800">Nombre de tu Título (Ej: Ingeniería Informática)</h3>
-                    <p class="text-md text-gray-600">Nombre de la Universidad o Institución | Ciudad, País</p>
-                    <p class="text-sm text-gray-500 italic">Año de Graduación (o "En Curso")</p>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Nombre de tu Título (Ej: Ingeniería Informática)</h3>
+                    <p class="text-md text-gray-600 dark:text-gray-400">Nombre de la Universidad o Institución | Ciudad, País</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Año de Graduación (o "En Curso")</p>
                     </article>
 
                  <article class="mb-4">
-                    <h3 class="text-xl font-semibold text-gray-800">Nombre de Certificación o Curso Relevante</h3>
-                    <p class="text-md text-gray-600">Institución Emisora</p>
-                    <p class="text-sm text-gray-500 italic">Año de Obtención</p>
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Nombre de Certificación o Curso Relevante</h3>
+                    <p class="text-md text-gray-600 dark:text-gray-400">Institución Emisora</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Año de Obtención</p>
                 </article>
 
                 </section>
 
             <section>
-                <h2 class="text-2xl font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4">Habilidades Técnicas</h2>
-                <div class="flex flex-wrap gap-x-4 gap-y-2">
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Python</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">JavaScript</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">HTML5</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">CSS3</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Tailwind CSS</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">React</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Node.js</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Flask/Django</span>
-                     <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">SQL</span>
-                     <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">NoSQL (MongoDB)</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Git</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Docker</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">AWS/GCP/Azure</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Flutter</span>
-                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Dart</span>
+                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-700 pb-2 mb-4">Habilidades Técnicas</h2>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Python</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">JavaScript</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">HTML5</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">CSS3</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Tailwind CSS</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">React</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Node.js</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Flask/Django</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">SQL</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">NoSQL (MongoDB)</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Git</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Docker</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">AWS/GCP/Azure</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Flutter</span>
+                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Dart</span>
                     </div>
                  </section>
 
         </main>
 
-        <footer class="text-center text-sm text-gray-500 p-4 border-t border-gray-200">
-            Última actualización: Abril 2025
+        <footer class="text-center text-sm text-gray-500 dark:text-gray-400 p-4 border-t border-gray-200 dark:border-gray-700">
+            Última actualización: <span id="last-updated">Abril 2025</span>
         </footer>
 
     </div>
+
+    <script>
+        // Añadido para asegurar que el script se ejecuta después de cargar el DOM
+        document.addEventListener('DOMContentLoaded', (event) => {
+            console.log("DOM fully loaded and parsed"); // Mensaje de depuración
+
+            // Selectores de iconos y botón
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+            const themeToggleButton = document.getElementById('theme-toggle');
+
+            // Verificar si los elementos existen
+            if (!themeToggleDarkIcon || !themeToggleLightIcon || !themeToggleButton) {
+                console.error("Theme toggle elements not found!");
+                return; // Salir si no se encuentran los elementos
+            }
+             console.log("Theme toggle elements found."); // Mensaje de depuración
+
+            // Función para actualizar iconos
+            const updateIcons = (isDarkMode) => {
+                 console.log("Updating icons. isDarkMode:", isDarkMode); // Mensaje de depuración
+                if (isDarkMode) {
+                    themeToggleLightIcon.classList.remove('hidden');
+                    themeToggleDarkIcon.classList.add('hidden');
+                } else {
+                    themeToggleDarkIcon.classList.remove('hidden');
+                    themeToggleLightIcon.classList.add('hidden');
+                }
+            };
+
+            // Comprobar preferencia guardada o preferencia del sistema al cargar
+            let isDarkMode = localStorage.getItem('color-theme') === 'dark' ||
+                             (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+             console.log("Initial check: isDarkMode:", isDarkMode); // Mensaje de depuración
+
+            // Aplicar tema inicial y actualizar icono
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+            updateIcons(isDarkMode);
+             console.log("Initial theme set."); // Mensaje de depuración
+
+            // Event listener para el botón
+            themeToggleButton.addEventListener('click', () => {
+                 console.log("Theme toggle button clicked."); // Mensaje de depuración
+                // Alternar estado
+                isDarkMode = !isDarkMode;
+                 console.log("Toggling theme. New isDarkMode:", isDarkMode); // Mensaje de depuración
+
+                // Actualizar clase en <html>
+                document.documentElement.classList.toggle('dark', isDarkMode);
+
+                // Guardar preferencia en localStorage
+                localStorage.setItem('color-theme', isDarkMode ? 'dark' : 'light');
+                 console.log("Theme preference saved to localStorage:", localStorage.getItem('color-theme')); // Mensaje de depuración
+
+                // Actualizar icono
+                updateIcons(isDarkMode);
+            });
+
+            // Opcional: Actualizar fecha de última actualización dinámicamente
+            // const lastUpdatedSpan = document.getElementById('last-updated');
+            // if (lastUpdatedSpan) {
+            //     const now = new Date();
+            //     const options = { year: 'numeric', month: 'long' };
+            //     lastUpdatedSpan.textContent = now.toLocaleDateString('es-ES', options);
+            // }
+        }); // Fin del DOMContentLoaded listener
+
+    </script>
 
 </body>
 </html>
