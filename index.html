@@ -2,58 +2,111 @@
 <html lang="en" class=""> 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta 
+        name="viewport" 
+        content="width=device-width, initial-scale=1.0"
+    >
     <title>Jonathan Lloret - Resume</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-          darkMode: 'class', // Ensure the strategy is 'class'
+          darkMode: 'class', // Asegurar que la estrategia es 'class'
           theme: {
             extend: {
-              // You can add theme extensions here if needed in the future
+              // Puedes añadir extensiones de tema aquí si es necesario en el futuro
             }
           }
         }
       </script>
     <style>
-        /* Base and custom styles */
+        /* Estilos base y personalizados */
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Base link style */
-        a { color: #0ea5e9; /* text-sky-600 */ }
-        a:hover { text-decoration: underline; }
-        .dark a { color: #38bdf8; /* text-sky-400 */ }
-
-        /* Print styles */
-        @media print {
-            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .no-print { display: none; }
-            body, .resume-container { background-color: #ffffff !important; color: #000000 !important; }
-            header { background-color: #1e293b !important; color: #ffffff !important; }
-            header a:not(.download-button) { color: #ffffff !important; }
-            .section-content, .job-detail-content { display: block !important; max-height: none !important; overflow: visible !important; opacity: 1 !important; transform: none !important; } /* Ensure content visible & no transforms for print */
-            .collapsible-icon, .job-menu { display: none !important; } /* Hide icons and job menu */
-            .job-detail-content .role-block { margin-bottom: 1rem !important; padding-bottom: 0.5rem !important; border-bottom: 1px solid #e2e8f0 !important; page-break-inside: avoid;}
-             .job-detail-content .role-block:last-child { border-bottom: none !important; }
-            span.skill-tag { background-color: #f1f5f9 !important; color: #1e293b !important; }
+        /* Estilo base para enlaces */
+        a { 
+            color: #0ea5e9; /* text-sky-600 */ 
         }
-        /* Icons */
-        .icon { display: inline-block; width: 1.25em; height: 1.25em; stroke-width: 1.5; stroke: currentColor; fill: none; vertical-align: middle; }
-        .hidden { display: none; }
+        a:hover { 
+            text-decoration: underline; 
+        }
+        .dark a { 
+            color: #38bdf8; /* text-sky-400 */ 
+        }
 
-         /* Smooth transition for collapsible sections */
+        /* Estilos de impresión */
+        @media print {
+            body { 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+            }
+            .no-print { 
+                display: none; 
+            }
+            body, .resume-container { 
+                background-color: #ffffff !important; 
+                color: #000000 !important; 
+            }
+            header { 
+                background-color: #1e293b !important; 
+                color: #ffffff !important; 
+            }
+            header a:not(.download-button) { 
+                color: #ffffff !important; 
+            }
+            /* Asegurar que el contenido colapsable sea visible al imprimir */
+            .section-content, .job-detail-content { 
+                display: block !important; 
+                max-height: none !important; 
+                overflow: visible !important; 
+                opacity: 1 !important; 
+                transform: none !important; 
+            } 
+             /* Ocultar iconos y menú de trabajos al imprimir */
+            .collapsible-icon, .job-menu { 
+                display: none !important; 
+            } 
+            /* Añadir separadores y prevenir saltos dentro de roles al imprimir */
+            .job-detail-content .role-block { 
+                margin-bottom: 1rem !important; 
+                padding-bottom: 0.5rem !important; 
+                border-bottom: 1px solid #e2e8f0 !important; 
+                page-break-inside: avoid;
+            }
+             .job-detail-content .role-block:last-child { 
+                 border-bottom: none !important; 
+             }
+            span.skill-tag { 
+                background-color: #f1f5f9 !important; 
+                color: #1e293b !important; 
+            }
+        }
+        /* Iconos */
+        .icon { 
+            display: inline-block; 
+            width: 1.25em; 
+            height: 1.25em; 
+            stroke-width: 1.5; 
+            stroke: currentColor; 
+            fill: none; 
+            vertical-align: middle; 
+        }
+        .hidden { 
+            display: none; 
+        }
+
+         /* Transición suave para secciones colapsables */
          .section-content {
             overflow: hidden;
             transition: max-height 0.4s ease-in-out;
-            max-height: 0; /* Collapsed by default */
+            max-height: 0; /* Colapsado por defecto */
          }
-         /* Transition for job details - applied via classes */
+         /* Transición para visibilidad de detalles de trabajo (opacidad) - aplicada vía clases */
          .job-detail-content {
-             /* Base classes added directly in HTML: transition-all duration-500 ease-in-out opacity-0 translate-x-4 */
+             /* Clases base añadidas directamente en HTML: transition-all duration-500 ease-in-out opacity-0 translate-x-4 */
          }
 
-         /* Active tab button style */
+         /* Estilo del botón de pestaña activo */
          .job-tab-button.active {
              background-color: #0284c7; /* bg-sky-600 */
              color: #ffffff; /* text-white */
@@ -64,30 +117,65 @@
 
     </style>
      <link rel="preconnect" href="https://rsms.me/">
-     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+     <link 
+        rel="stylesheet" 
+        href="https://rsms.me/inter/inter.css"
+    >
 </head>
-<body class="bg-slate-50 dark:bg-slate-950 p-4 md:p-8 lg:p-12 transition-colors duration-300 ease-in-out" style="font-family: 'Inter', sans-serif;">
+<body 
+    class="bg-slate-50 dark:bg-slate-950 p-4 md:p-8 lg:p-12 transition-colors duration-300 ease-in-out" 
+    style="font-family: 'Inter', sans-serif;"
+>
 
     <div class="resume-container max-w-4xl mx-auto bg-white dark:bg-slate-800 shadow-xl rounded-lg overflow-hidden relative">
 
-        <button id="theme-toggle" type="button" class="no-print absolute top-4 right-4 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700 rounded-lg text-sm p-2.5 transition-colors duration-200 z-10">
-            <svg id="theme-toggle-dark-icon" class="icon hidden" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 008.307-4.498z" /> </svg>
-            <svg id="theme-toggle-light-icon" class="icon hidden" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /> </svg>
+        <button 
+            id="theme-toggle" 
+            type="button" 
+            class="no-print absolute top-4 right-4 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700 rounded-lg text-sm p-2.5 transition-colors duration-200 z-10"
+        >
+            <svg id="theme-toggle-dark-icon" class="icon hidden" viewBox="0 0 24 24"> 
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 008.307-4.498z" 
+                /> 
+            </svg>
+            <svg id="theme-toggle-light-icon" class="icon hidden" viewBox="0 0 24 24"> 
+                <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" 
+                /> 
+            </svg>
         </button>
 
         <header class="bg-slate-800 dark:bg-slate-900 text-white p-6 md:p-8 text-center">
             <h1 class="text-3xl md:text-4xl font-bold">JONATHAN LLORET</h1>
             <p class="text-lg md:text-xl text-slate-300 dark:text-slate-400 mt-1">CONTACT CENTRE SPECIALIST - LEARNING DEVELOPER</p>
             <div class="mt-4 text-sm md:text-base text-slate-400 dark:text-slate-500 flex flex-wrap justify-center gap-x-4 gap-y-2">
-                <span><a href="mailto:lloret.jonathan@icloud.com" class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300">lloret.jonathan@icloud.com</a></span>
+                <span>
+                    <a 
+                        href="mailto:lloret.jonathan@icloud.com" 
+                        class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300"
+                    >lloret.jonathan@icloud.com</a>
+                </span>
                 <span class="hidden sm:inline">|</span>
-                <span><a href="tel:07731835212" class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300">07731835212</a></span>
+                <span>
+                    <a 
+                        href="tel:07731835212" 
+                        class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300"
+                    >07731835212</a>
+                </span>
                 <span class="hidden sm:inline">|</span>
                 <span>Liverpool</span>
             </div>
              <div class="mt-6">
-                <a href="JonathanMartinezCV.pdf" download
-                   class="download-button inline-block bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-colors duration-200 no-print text-sm md:text-base">
+                <a 
+                    href="JonathanMartinezCV.pdf" 
+                    download
+                    class="download-button inline-block bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-colors duration-200 no-print text-sm md:text-base"
+                >
                     Download CV
                 </a>
             </div>
@@ -98,40 +186,89 @@
             <section class="mb-8">
                 <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-4">Professional Summary</h2>
                 <div class="space-y-3"> 
-                    <p class="leading-relaxed text-slate-600 dark:text-slate-400">With a strong background in customer service and technical support, I've recently focused on acquiring programming skills, specifically in Machine Learning, AI, and the associated data handling techniques. I am now eager to apply this knowledge and my proven problem-solving abilities to a remote programming role, particularly one involving data analysis.</p>
-                    <p class="leading-relaxed text-slate-600 dark:text-slate-400">My commitment to deliver consistent quality service and attention to detail makes me a strong candidate for any team. I am a collaborative and organised individual, ready to apply my skills and enthusiasm for technology in a new capacity. I am confident I have the knowledge and materials to add value to any workforce from day 1, and a remote position aligns perfectly with my career aspirations and personal goals.</p>
+                    <p class="leading-relaxed text-slate-600 dark:text-slate-400">
+                        With a strong background in customer service and technical support, I've recently focused on acquiring programming skills, specifically in Machine Learning, AI, and the associated data handling techniques. I am now eager to apply this knowledge and my proven problem-solving abilities to a remote programming role, particularly one involving data analysis.
+                    </p>
+                    <p class="leading-relaxed text-slate-600 dark:text-slate-400">
+                        My commitment to deliver consistent quality service and attention to detail makes me a strong candidate for any team. I am a collaborative and organised individual, ready to apply my skills and enthusiasm for technology in a new capacity. I am confident I have the knowledge and materials to add value to any workforce from day 1, and a remote position aligns perfectly with my career aspirations and personal goals.
+                    </p>
                 </div>
             </section>
 
             <section class="mb-8">
-                <div class="collapsible-header flex justify-between items-center cursor-pointer group mb-4" aria-expanded="false">
-                     <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Work Experience (Download CV for more)</h2>
-                    <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <div 
+                    class="collapsible-header flex justify-between items-center cursor-pointer group mb-4" 
+                    aria-expanded="false"
+                >
+                    <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                        Work Experience (Download CV for more)
+                    </h2>
+                    <svg 
+                        class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24" 
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            stroke-width="2" 
+                            d="M19 9l-7 7-7-7"
+                        ></path>
+                    </svg>
                 </div>
                 <div class="section-content">
-                    <div class="job-menu flex flex-wrap gap-2 mb-4 border-b border-slate-200 dark:border-slate-700 pb-2" role="tablist">
-                        <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-diligenta" role="tab" aria-selected="false">Diligenta</button>
-                        <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-dazn" role="tab" aria-selected="false">DAZN</button>
-                         <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-taco-bell" role="tab" aria-selected="false">Taco Bell</button>
+                    <div 
+                        class="job-menu flex flex-wrap gap-2 mb-4 border-b border-slate-200 dark:border-slate-700 pb-2" 
+                        role="tablist"
+                    >
+                        <button 
+                            type="button" 
+                            class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" 
+                            data-target="job-diligenta" 
+                            role="tab" 
+                            aria-selected="false"
+                        >Diligenta</button>
+                        <button 
+                            type="button" 
+                            class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" 
+                            data-target="job-dazn" 
+                            role="tab" 
+                            aria-selected="false"
+                        >DAZN</button>
+                         <button 
+                            type="button" 
+                            class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" 
+                            data-target="job-taco-bell" 
+                            role="tab" 
+                            aria-selected="false"
+                        >Taco Bell</button>
                     </div>
 
                     <div class="job-details-container mt-4">
-                         <div id="job-diligenta" class="job-detail-content hidden opacity-0 translate-x-4 transition-all duration-500 ease-in-out" role="tabpanel" aria-labelledby="job-tab-diligenta">
+                         <div 
+                            id="job-diligenta" 
+                            class="job-detail-content hidden opacity-0 translate-x-4 transition-all duration-500 ease-in-out" 
+                            role="tabpanel" 
+                            aria-labelledby="job-tab-diligenta"
+                        >
                              <div class="mb-4 pb-2 border-b border-slate-200 dark:border-slate-700">
                                  <p class="text-xl font-semibold text-slate-700 dark:text-slate-200">Diligenta (Subsidiary of TCS) | Liverpool</p>
                                 <p class="text-sm text-slate-500 dark:text-slate-500 italic">April 2024 - Present</p>
                             </div>
                             <div class="space-y-4">
-                                <div class="role-block">
-                                     <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Contact Centre Specialist (Technical support role)</h3>
-                                    <p class="text-sm text-slate-500 dark:text-slate-500 italic">(Current)</p> <ul class="list-disc list-inside mt-1 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                <div class="role-block"> 
+                                    <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Contact Centre Specialist (Technical support role)</h3>
+                                    <p class="text-sm text-slate-500 dark:text-slate-500 italic">(Current)</p> 
+                                    <ul class="list-disc list-inside mt-1 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
                                          <li>Joined the Customer Care Team, a reduced group that focuses on the last part of the retirement journey</li>
                                          <li>Carefully explained risks and considerations, and professionally addressed complaints, and the most complex of queries.</li>
                                          <li>Referred customers for guidance and advice, and adapted any process to suit the clients needs and/or vulnerabilities.</li>
                                          <li>Contributed to the workplace and its Consumer Duty culture through constructive feedback, and implemented changes that help everyone to this day.</li>
                                      </ul>
                                 </div>
-                                <div class="role-block">
+                                <div class="role-block"> 
                                       <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Contact Centre Advisor | Phoenix life ltd.</h3>
                                      <p class="text-sm text-slate-500 dark:text-slate-500 italic">(Previous Role)</p>
                                     <ul class="list-disc list-inside mt-1 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
@@ -142,7 +279,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="job-dazn" class="job-detail-content hidden opacity-0 translate-x-4 transition-all duration-500 ease-in-out" role="tabpanel" aria-labelledby="job-tab-dazn">
+                        <div 
+                            id="job-dazn" 
+                            class="job-detail-content hidden opacity-0 translate-x-4 transition-all duration-500 ease-in-out" 
+                            role="tabpanel" 
+                            aria-labelledby="job-tab-dazn"
+                        >
                              <div class="mb-4 pb-2 border-b border-slate-200 dark:border-slate-700">
                                   <p class="text-xl font-semibold text-slate-700 dark:text-slate-200">DAZN (through Assist Digital CRM) | Valencia</p>
                                 <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb '23 – Sep '23 (seasonal role)</p>
@@ -157,7 +299,12 @@
                                 </ul>
                              </div>
                         </div>
-                         <div id="job-taco-bell" class="job-detail-content hidden opacity-0 translate-x-4 transition-all duration-500 ease-in-out" role="tabpanel" aria-labelledby="job-tab-taco-bell">
+                         <div 
+                            id="job-taco-bell" 
+                            class="job-detail-content hidden opacity-0 translate-x-4 transition-all duration-500 ease-in-out" 
+                            role="tabpanel" 
+                            aria-labelledby="job-tab-taco-bell"
+                        >
                              <div class="mb-4 pb-2 border-b border-slate-200 dark:border-slate-700">
                                   <p class="text-xl font-semibold text-slate-700 dark:text-slate-200">Taco Bell (Taco-time Ltd, Adil Group of companies) | London, UK</p>
                                  <p class="text-sm text-slate-500 dark:text-slate-500 italic">Dec '19 – Jul '22</p>
@@ -205,9 +352,25 @@
             </section>
 
             <section class="mb-8">
-                 <div class="collapsible-header flex justify-between items-center cursor-pointer group" aria-expanded="false">
+                 <div 
+                    class="collapsible-header flex justify-between items-center cursor-pointer group" 
+                    aria-expanded="false"
+                >
                     <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Education & Training</h2>
-                    <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg 
+                        class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24" 
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            stroke-width="2" 
+                            d="M19 9l-7 7-7-7"
+                        ></path>
+                    </svg>
                 </div>
                  <div class="section-content mt-4 space-y-4">
                       <article>
@@ -235,16 +398,37 @@
                         <p class="text-md text-slate-600 dark:text-slate-400">Ntra. Sra. del Pilar School | Valencia</p>
                          <p class="text-sm text-slate-500 dark:text-slate-500 italic">Finished 2016</p>
                     </article>
-                </div> </section>
+                </div> 
+            </section>
 
              <section class="mb-8">
-                 <div class="collapsible-header flex justify-between items-center cursor-pointer group" aria-expanded="false">
+                 <div 
+                    class="collapsible-header flex justify-between items-center cursor-pointer group" 
+                    aria-expanded="false"
+                >
                     <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Featured Projects</h2>
-                    <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg 
+                        class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24" 
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            stroke-width="2" 
+                            d="M19 9l-7 7-7-7"
+                        ></path>
+                    </svg>
                 </div>
                  <div class="section-content mt-4 space-y-6">
                      <article>
-                         <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100"> Rewind Studio <span class="text-sm font-normal ml-2">[<a href="#" target="_blank" rel="noopener noreferrer">Website is no longer active :(</a>]</span> </h3>
+                         <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100"> Rewind Studio 
+                             <span class="text-sm font-normal ml-2">
+                                 [<a href="#" target="_blank" rel="noopener noreferrer">Website is no longer active :(</a>]
+                            </span> 
+                        </h3>
                         <p class="text-sm text-slate-500 dark:text-slate-500 italic">Created a brand and opened a music studio/shop in which clients</p>
                         <p class="text-sm text-slate-500 dark:text-slate-500 italic">could bring their projects to life and purchase studio equipment.</p>
                         <p class="text-sm text-slate-500 dark:text-slate-500 italic">Individually budgeted project for every client. Dedicated craftsmanship  and attention to detail</p>
@@ -252,18 +436,39 @@
                         <p class="mt-2 leading-relaxed text-slate-600 dark:text-slate-400">Started on 2017 and closed before moving to England.</p>
                     </article>
                      <article>
-                          <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Programming journey<span class="text-sm font-normal ml-2">[<a href="#" target="_blank" rel="noopener noreferrer">Portfolio coming soon...</a>]</span> </h3>
+                          <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Programming journey
+                              <span class="text-sm font-normal ml-2">
+                                  [<a href="#" target="_blank" rel="noopener noreferrer">Portfolio coming soon...</a>]
+                                </span> 
+                            </h3>
                         <p class="text-sm text-slate-500 dark:text-slate-500 italic">Recently started learning basic HTML, JS and CSS. I discovered python and instantly fell in love with it.</p>
                         <p class="text-sm text-slate-500 dark:text-slate-500 italic">That has really fast tracked my learning and further enhanced my digital skills.</p>
                         <p class="text-sm text-slate-500 dark:text-slate-500 italic">Currently learning data structures and how ML and LLM works.</p>
                          <p class="mt-2 leading-relaxed text-slate-600 dark:text-slate-400">Enyoing my learning so far and eager to know more.</p>
                     </article>
-                </div> </section>
+                </div> 
+            </section>
 
             <section class="mb-8">
-                 <div class="collapsible-header flex justify-between items-center cursor-pointer group" aria-expanded="false">
+                 <div 
+                    class="collapsible-header flex justify-between items-center cursor-pointer group" 
+                    aria-expanded="false"
+                >
                     <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Core Skills</h2>
-                    <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg 
+                        class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24" 
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            stroke-width="2" 
+                            d="M19 9l-7 7-7-7"
+                        ></path>
+                    </svg>
                 </div>
                  <div class="section-content mt-4">
                      <div class="flex flex-wrap gap-2">
@@ -283,12 +488,29 @@
                          <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Dart (Begginer)</span>
 
                     </div>
-                </div> </section>
+                </div> 
+            </section>
 
              <section>
-                 <div class="collapsible-header flex justify-between items-center cursor-pointer group" aria-expanded="false">
+                 <div 
+                    class="collapsible-header flex justify-between items-center cursor-pointer group" 
+                    aria-expanded="false"
+                >
                     <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Hobbies & Interests</h2>
-                    <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg 
+                        class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24" 
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path 
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            stroke-width="2" 
+                            d="M19 9l-7 7-7-7"
+                        ></path>
+                    </svg>
                 </div>
                  <div class="section-content mt-4">
                      <ul class="list-disc list-inside leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
@@ -297,7 +519,8 @@
                          <li>Digital content (I often edit videos or mix songs for content creators/artists).</li>
                          <li>PC budgeting and installation, repairs.</li>
                      </ul>
-                 </div> </section>
+                 </div> 
+            </section>
 
         </main>
 
@@ -316,21 +539,65 @@
             const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
             const themeToggleButton = document.getElementById('theme-toggle');
             if (themeToggleDarkIcon && themeToggleLightIcon && themeToggleButton) {
-                const updateIcons = (isDarkMode) => { if (isDarkMode) { themeToggleLightIcon.classList.remove('hidden'); themeToggleDarkIcon.classList.add('hidden'); } else { themeToggleDarkIcon.classList.remove('hidden'); themeToggleLightIcon.classList.add('hidden'); } };
-                let isDarkMode = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                const applyTheme = (darkMode) => { if (darkMode) { document.documentElement.classList.add('dark'); } else { document.documentElement.classList.remove('dark'); } updateIcons(darkMode); }
+                const updateIcons = (isDarkMode) => { 
+                    if (isDarkMode) { 
+                        themeToggleLightIcon.classList.remove('hidden'); 
+                        themeToggleDarkIcon.classList.add('hidden'); 
+                    } else { 
+                        themeToggleDarkIcon.classList.remove('hidden'); 
+                        themeToggleLightIcon.classList.add('hidden'); 
+                    } 
+                };
+                let isDarkMode = localStorage.getItem('color-theme') === 'dark' || 
+                                 (!('color-theme' in localStorage) && 
+                                  window.matchMedia('(prefers-color-scheme: dark)').matches);
+                const applyTheme = (darkMode) => { 
+                    if (darkMode) { 
+                        document.documentElement.classList.add('dark'); 
+                    } else { 
+                        document.documentElement.classList.remove('dark'); 
+                    } 
+                    updateIcons(darkMode); 
+                }
                 applyTheme(isDarkMode);
-                themeToggleButton.addEventListener('click', () => { isDarkMode = !isDarkMode; localStorage.setItem('color-theme', isDarkMode ? 'dark' : 'light'); applyTheme(isDarkMode); });
-            } else { console.error("Dark mode toggle elements not found!"); }
+                themeToggleButton.addEventListener('click', () => { 
+                    isDarkMode = !isDarkMode; 
+                    localStorage.setItem('color-theme', isDarkMode ? 'dark' : 'light'); 
+                    applyTheme(isDarkMode); 
+                });
+            } else { 
+                console.error("Dark mode toggle elements not found!"); 
+            }
 
 
             // --- Collapsible Section Logic ---
             const mainHeaders = document.querySelectorAll('.collapsible-header');
             mainHeaders.forEach(header => {
-                const content = header.nextElementSibling; const icon = header.querySelector('.collapsible-icon'); if (!content || !icon || !content.classList.contains('section-content')) return;
-                content.style.maxHeight = '0px'; header.setAttribute('aria-expanded', 'false');
-                header.addEventListener('click', (e) => { if (e.target.closest('.job-tab-button')) return; const isExpanded = header.getAttribute('aria-expanded') === 'true'; if (isExpanded) { content.style.maxHeight = '0px'; icon.classList.remove('rotate-180'); header.setAttribute('aria-expanded', 'false'); } else { content.style.maxHeight = content.scrollHeight + "px"; icon.classList.add('rotate-180'); header.setAttribute('aria-expanded', 'true'); } });
-                content.addEventListener('transitionend', () => { if (header.getAttribute('aria-expanded') === 'true') { content.style.maxHeight = 'none'; } });
+                const content = header.nextElementSibling; 
+                const icon = header.querySelector('.collapsible-icon'); 
+                if (!content || !icon || !content.classList.contains('section-content')) return;
+                
+                content.style.maxHeight = '0px'; 
+                header.setAttribute('aria-expanded', 'false');
+                
+                header.addEventListener('click', (e) => { 
+                    if (e.target.closest('.job-tab-button')) return; 
+                    const isExpanded = header.getAttribute('aria-expanded') === 'true'; 
+                    if (isExpanded) { 
+                        content.style.maxHeight = '0px'; 
+                        icon.classList.remove('rotate-180'); 
+                        header.setAttribute('aria-expanded', 'false'); 
+                    } else { 
+                        content.style.maxHeight = content.scrollHeight + "px"; 
+                        icon.classList.add('rotate-180'); 
+                        header.setAttribute('aria-expanded', 'true'); 
+                    } 
+                });
+                content.addEventListener('transitionend', () => { 
+                    if (header.getAttribute('aria-expanded') === 'true') { 
+                        content.style.maxHeight = 'none'; 
+                    } 
+                });
             });
 
 
@@ -358,7 +625,9 @@
                             if (targetContent) {
                                 targetContent.classList.remove('opacity-100', 'translate-x-0'); // Start fade out
                                 targetContent.classList.add('opacity-0', 'translate-x-4');
-                                setTimeout(() => { targetContent.classList.add('hidden'); }, animationDuration);
+                                setTimeout(() => { 
+                                    targetContent.classList.add('hidden'); 
+                                }, animationDuration);
                             }
                             button.classList.remove('active');
                             button.setAttribute('aria-selected', 'false');
@@ -383,7 +652,15 @@
                                     activeJobTargetId = targetId; // Set new active ID
 
                                      // Adjust parent height after new content animation starts
-                                     if (parentSectionContent && parentSectionContent.style.maxHeight !== '0px') { setTimeout(() => { const currentMaxHeight = parentSectionContent.style.maxHeight; parentSectionContent.style.maxHeight = 'none'; const newScrollHeight = parentSectionContent.scrollHeight; parentSectionContent.style.maxHeight = currentMaxHeight; parentSectionContent.style.maxHeight = newScrollHeight + "px"; }, 50); }
+                                     if (parentSectionContent && parentSectionContent.style.maxHeight !== '0px') { 
+                                         setTimeout(() => { 
+                                             const currentMaxHeight = parentSectionContent.style.maxHeight; 
+                                             parentSectionContent.style.maxHeight = 'none'; 
+                                             const newScrollHeight = parentSectionContent.scrollHeight; 
+                                             parentSectionContent.style.maxHeight = currentMaxHeight; 
+                                             parentSectionContent.style.maxHeight = newScrollHeight + "px"; 
+                                            }, 50); 
+                                        }
 
                                 } else {
                                     activeJobTargetId = null;
@@ -413,4 +690,4 @@
     </script>
 
 </body>
-</html
+</html>
