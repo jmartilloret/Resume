@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" class=""> <head>
+<html lang="en" class=""> 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jonathan Lloret - Resume</title>
@@ -30,11 +31,11 @@
             .no-print { display: none; }
             body, .resume-container { background-color: #ffffff !important; color: #000000 !important; }
             header { background-color: #1e293b !important; color: #ffffff !important; }
-            header a:not(.download-button) { color: #ffffff !important; } /* Style header links, exclude download button */
-            .section-content, .job-detail-content { display: block !important; max-height: none !important; } /* Ensure content visible */
+            header a:not(.download-button) { color: #ffffff !important; }
+            .section-content, .job-detail-content { display: block !important; max-height: none !important; overflow: visible !important; opacity: 1 !important; transform: none !important; } /* Ensure content visible & no transforms for print */
             .collapsible-icon, .job-menu { display: none !important; } /* Hide icons and job menu */
-            .job-detail-content article { margin-bottom: 1rem !important; padding-bottom: 0.5rem !important; border-bottom: 1px solid #e2e8f0 !important; } /* Add separators for print */
-             .job-detail-content article:last-child { border-bottom: none !important; }
+            .job-detail-content .role-block { margin-bottom: 1rem !important; padding-bottom: 0.5rem !important; border-bottom: 1px solid #e2e8f0 !important; page-break-inside: avoid;}
+             .job-detail-content .role-block:last-child { border-bottom: none !important; }
             span.skill-tag { background-color: #f1f5f9 !important; color: #1e293b !important; }
         }
         /* Icons */
@@ -47,14 +48,18 @@
             transition: max-height 0.4s ease-in-out;
             max-height: 0; /* Collapsed by default */
          }
-         /* Transition for job details visibility (opacity) */
+         /* Transition for job details - applied via classes */
          .job-detail-content {
-            transition: opacity 0.3s ease-in-out;
+             /* Base classes added directly in HTML: transition-all duration-500 ease-in-out opacity-0 translate-x-4 */
          }
 
          /* Active tab button style */
          .job-tab-button.active {
-             @apply bg-sky-600 text-white dark:bg-sky-500;
+             background-color: #0284c7; /* bg-sky-600 */
+             color: #ffffff; /* text-white */
+         }
+         .dark .job-tab-button.active {
+             background-color: #0ea5e9; /* dark:bg-sky-500 */
          }
 
     </style>
@@ -72,22 +77,18 @@
 
         <header class="bg-slate-800 dark:bg-slate-900 text-white p-6 md:p-8 text-center">
             <h1 class="text-3xl md:text-4xl font-bold">JONATHAN LLORET</h1>
-            <p class="text-lg md:text-xl text-slate-300 dark:text-slate-400 mt-1">CONTACT CENTRE ADVISOR / SPECIALIST</p>
+            <p class="text-lg md:text-xl text-slate-300 dark:text-slate-400 mt-1">CONTACT CENTRE SPECIALIST - LEARNING DEVELOPER</p>
             <div class="mt-4 text-sm md:text-base text-slate-400 dark:text-slate-500 flex flex-wrap justify-center gap-x-4 gap-y-2">
                 <span><a href="mailto:lloret.jonathan@icloud.com" class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300">lloret.jonathan@icloud.com</a></span>
                 <span class="hidden sm:inline">|</span>
                 <span><a href="tel:07731835212" class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300">07731835212</a></span>
                 <span class="hidden sm:inline">|</span>
                 <span>Liverpool</span>
-                <span class="hidden sm:inline">|</span>
-                <span><a href="#" target="_blank" rel="noopener noreferrer" class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300">LinkedIn</a></span>
-                <span class="hidden sm:inline">|</span>
-                <span><a href="https://github.com/jmartilloret" target="_blank" rel="noopener noreferrer" class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300">GitHub</a></span>
             </div>
              <div class="mt-6">
                 <a href="JonathanMartinezCV.pdf" download
                    class="download-button inline-block bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition-colors duration-200 no-print text-sm md:text-base">
-                    Download PDF Version
+                    Download CV
                 </a>
             </div>
         </header>
@@ -96,106 +97,112 @@
 
             <section class="mb-8">
                 <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-4">Professional Summary</h2>
-                <p class="leading-relaxed text-slate-600 dark:text-slate-400">
-                    Having finished my Level 1 Diploma in Contact Centre Operations, I am eager to join a home-based Customer Service Advisor role. I believe I have the equipment, skills, and ability to perform this role effectively. I am a team player who can get along with anyone. I am also well-organised and punctual. Furthermore, I always aim to provide high-quality service and commitment to my customers. With my excellent people skills, I strongly feel that I can add value to any workforce. On a personal level, I would like to move out to the countryside and a remote role would allow me to achieve personal goals in life.
-                </p>
+                <div class="space-y-3"> 
+                    <p class="leading-relaxed text-slate-600 dark:text-slate-400">With a strong background in customer service and technical support, I've recently focused on acquiring programming skills, specifically in Machine Learning, AI, and the associated data handling techniques. I am now eager to apply this knowledge and my proven problem-solving abilities to a remote programming role, particularly one involving data analysis.</p>
+                    <p class="leading-relaxed text-slate-600 dark:text-slate-400">My commitment to deliver consistent quality service and attention to detail makes me a strong candidate for any team. I am a collaborative and organised individual, ready to apply my skills and enthusiasm for technology in a new capacity. I am confident I have the knowledge and materials to add value to any workforce from day 1, and a remote position aligns perfectly with my career aspirations and personal goals.</p>
+                </div>
             </section>
 
             <section class="mb-8">
                 <div class="collapsible-header flex justify-between items-center cursor-pointer group mb-4" aria-expanded="false">
-                    <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Work Experience</h2>
+                     <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Work Experience (Download CV for more)</h2>
                     <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                 <div class="section-content">
                     <div class="job-menu flex flex-wrap gap-2 mb-4 border-b border-slate-200 dark:border-slate-700 pb-2" role="tablist">
                         <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-diligenta" role="tab" aria-selected="false">Diligenta</button>
-                        <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-dazn" role="tab" aria-selected="false">DAZN (Advisor)</button>
-                        <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-tedi" role="tab" aria-selected="false">TEDi (Shopkeeper)</button>
-                        <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-taco-bell" role="tab" aria-selected="false">Taco Bell (Progression)</button>
+                        <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-dazn" role="tab" aria-selected="false">DAZN</button>
+                         <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-taco-bell" role="tab" aria-selected="false">Taco Bell</button>
                     </div>
+
                     <div class="job-details-container mt-4">
-                        <div id="job-diligenta" class="job-detail-content hidden" role="tabpanel" aria-labelledby="job-tab-diligenta">
-                            <article>
-                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Contact Centre Specialist (Technical role)</h3>
-                                <p class="text-md text-slate-600 dark:text-slate-400">(Previously: Contact Centre Advisor)</p>
-                                <p class="text-md text-slate-600 dark:text-slate-400">Diligenta | Liverpool</p>
+                         <div id="job-diligenta" class="job-detail-content hidden opacity-0 translate-x-4 transition-all duration-500 ease-in-out" role="tabpanel" aria-labelledby="job-tab-diligenta">
+                             <div class="mb-4 pb-2 border-b border-slate-200 dark:border-slate-700">
+                                 <p class="text-xl font-semibold text-slate-700 dark:text-slate-200">Diligenta (Subsidiary of TCS) | Liverpool</p>
                                 <p class="text-sm text-slate-500 dark:text-slate-500 italic">April 2024 - Present</p>
-                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
-                                    <li></li>
-                                </ul>
-                            </article>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="role-block">
+                                     <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Contact Centre Specialist (Technical support role)</h3>
+                                    <p class="text-sm text-slate-500 dark:text-slate-500 italic">(Current)</p> <ul class="list-disc list-inside mt-1 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                         <li>Joined the Customer Care Team, a reduced group that focuses on the last part of the retirement journey</li>
+                                         <li>Carefully explained risks and considerations, and professionally addressed complaints, and the most complex of queries.</li>
+                                         <li>Referred customers for guidance and advice, and adapted any process to suit the clients needs and/or vulnerabilities.</li>
+                                         <li>Contributed to the workplace and its Consumer Duty culture through constructive feedback, and implemented changes that help everyone to this day.</li>
+                                     </ul>
+                                </div>
+                                <div class="role-block">
+                                      <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Contact Centre Advisor | Phoenix life ltd.</h3>
+                                     <p class="text-sm text-slate-500 dark:text-slate-500 italic">(Previous Role)</p>
+                                    <ul class="list-disc list-inside mt-1 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                        <li>Undertook training in pensions regulations (1988-present)</li>
+                                        <li>Quickly adapted to an ever-changing, highly regulated role while supporting customers with their queries.</li>
+                                        <li>Cross-trained across all different skillsets in a short period of time.</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div id="job-dazn" class="job-detail-content hidden" role="tabpanel" aria-labelledby="job-tab-dazn">
-                            <article>
-                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Customer Service Advisor</h3>
-                                <p class="text-md text-slate-600 dark:text-slate-400">DAZN (through Assist Digital CRM) | Valencia</p>
+                        <div id="job-dazn" class="job-detail-content hidden opacity-0 translate-x-4 transition-all duration-500 ease-in-out" role="tabpanel" aria-labelledby="job-tab-dazn">
+                             <div class="mb-4 pb-2 border-b border-slate-200 dark:border-slate-700">
+                                  <p class="text-xl font-semibold text-slate-700 dark:text-slate-200">DAZN (through Assist Digital CRM) | Valencia</p>
                                 <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb '23 – Sep '23 (seasonal role)</p>
-                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                            </div>
+                             <div class="role-block">
+                                  <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Contact Centre Advisor</h3>
+                                <ul class="list-disc list-inside mt-1 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
                                     <li>Use of Salesforce, AWS and Atlassian CRM systems to successfully manage customer accounts.</li>
-                                    <li>Inbound contact by live chat, handling 4 cases at a time. Outbound contact by e-mail following-up on customers needs.</li>
+                                     <li>Inbound contact by live chat, handling 4 cases at a time. Outbound contact by e-mail following-up on customers needs.</li>
                                     <li>Regularly checked for escalated cases and handled them (Refunds, Subscription changes and new error codes).</li>
                                     <li>Undertook training on sports content and licensing across different countries in Europe.</li>
                                 </ul>
-                            </article>
+                             </div>
                         </div>
-                        <div id="job-tedi" class="job-detail-content hidden" role="tabpanel" aria-labelledby="job-tab-tedi">
-                             <article>
-                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Shopkeeper</h3>
-                                <p class="text-md text-slate-600 dark:text-slate-400">TEDi stores | Valencia, Spain</p>
-                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">Dec '22 – Feb '23 (seasonal role)</p>
-                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
-                                    <li>Back of house warehouse duties, loading outbound and unpacking inbound pallets.</li>
-                                    <li>Kept the shop clean to give customers the best experience in each and every visit.</li>
-                                    <li>Greeted customers according to company standards.</li>
-                                    <li>Kept a record of sales and cash on the tills at closing.</li>
-                                    <li>Managed refunds and complaints.</li>
-                                    <li>Looked out for shoplifters and looked out for the safety of colleagues and other customers.</li>
-                                </ul>
-                             </article>
-                        </div>
-                        <div id="job-taco-bell" class="job-detail-content hidden space-y-6" role="tabpanel" aria-labelledby="job-tab-taco-bell">
-                             <article>
-                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Restaurant General Manager</h3>
-                                <p class="text-md text-slate-600 dark:text-slate-400">Taco Bell (Taco-time Ltd, Adil Group of companies) | London, UK</p>
-                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">~Jan '22 – Jul '22 (Estimated)</p>
-                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
-                                     <li>Given the chance to take RGM's place or open a new store in Woodgreen; chose the latter.</li>
-                                     <li>Trained the new management team, leading the store to outperform expectations.</li>
-                                     <li>Managed a challenging project with tight deadlines, requiring frequent problem-solving.</li>
-                                </ul>
-                             </article>
-                              <article>
-                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Assistant Manager</h3>
-                                <p class="text-md text-slate-600 dark:text-slate-400">Taco Bell (Taco-time Ltd, Adil Group of companies) | London, UK</p>
-                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">~Jun '21 – Dec '21 (Estimated)</p>
-                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
-                                    <li>Promoted by Area Coach.</li>
-                                     <li>Mentored by RGM for over 6 months in preparation for management responsibilities.</li>
+                         <div id="job-taco-bell" class="job-detail-content hidden opacity-0 translate-x-4 transition-all duration-500 ease-in-out" role="tabpanel" aria-labelledby="job-tab-taco-bell">
+                             <div class="mb-4 pb-2 border-b border-slate-200 dark:border-slate-700">
+                                  <p class="text-xl font-semibold text-slate-700 dark:text-slate-200">Taco Bell (Taco-time Ltd, Adil Group of companies) | London, UK</p>
+                                 <p class="text-sm text-slate-500 dark:text-slate-500 italic">Dec '19 – Jul '22</p>
+                             </div>
+                              <div class="space-y-4">
+                                 <div class="role-block">
+                                      <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Restaurant General Manager | RGM</h3>
+                                     <ul class="list-disc list-inside mt-1 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                         <li>Given the chance to take RGM's place or open a new store in Woodgreen; chose the latter.</li>
+                                          <li>Thouroghly trained the new management team, leading the store to outperform expectations.</li>
+                                         <li>Managed a challenging project with tight deadlines, requiring frequent problem-solving.</li>
+                                          <li>Responsible for food safety, food/labor cost, customer satisfaction, and anything else in between.</li>
                                      </ul>
-                             </article>
-                              <article>
-                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Team Leader</h3>
-                                <p class="text-md text-slate-600 dark:text-slate-400">Taco Bell (Taco-time Ltd, Adil Group of companies) | London, UK</p>
-                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb '20 – May '21 (Estimated)</p>
-                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
-                                     <li>Promoted to Team Leader in Feb '20.</li>
-                                     <li>Part of the reduced team brought back from furlough after the lockdown.</li>
-                                     <li>Regularly delivered the best customer service and ensured company standards were met.</li>
-                                     <li>Passed all audits during this period.</li>
-                                </ul>
-                             </article>
-                              <article>
-                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Kitchen / Fryer Staff</h3>
-                                <p class="text-md text-slate-600 dark:text-slate-400">Taco Bell (Taco-time Ltd, Adil Group of companies) | London, UK</p>
-                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">Dec '19 – Feb '20 (Estimated)</p>
-                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
-                                     <li>Started in the fryer station, cooking and supplying the kitchen in a fast-paced work environment.</li>
-                                     <li>After approximately one month, undertook and succeeded in training for all areas in the kitchen and FOH.</li>
-                                </ul>
-                             </article>
+                                 </div>
+                                 <div class="role-block">
+                                      <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Assistant Manager | ARM</h3>
+                                     <ul class="list-disc list-inside mt-1 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                         <li>Promoted by Area Coach.</li>
+                                         <li>Mentored by RGM for over 6 months in preparation for management responsibilities.</li>
+                                          <li>Responsible for the store in the absence of the RGM.</li>
+                                         <li>Managed stock, staff rota, and training. Sought feedback from colleagues to always try an do better.</li>
+                                         </ul>
+                                 </div>
+                                 <div class="role-block">
+                                      <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Team Leader | Supervisor</h3>
+                                     <ul class="list-disc list-inside mt-1 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                         <li>Promoted to Team Leader in Feb '20.</li>
+                                         <li>Part of the reduced team brought back from furlough after the lockdown.</li>
+                                         <li>Regularly delivered the best customer service and ensured company standards were met.</li>
+                                         <li>Passed all audits during this period.</li>
+                                          <li>(on shift) Responsible for team deployment, prep and closing.</li>
+                                     </ul>
+                                 </div>
+                                  <div class="role-block">
+                                      <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Kitchen / Fryer Staff </h3>
+                                     <ul class="list-disc list-inside mt-1 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                         <li>Started in the fryer station, cooking and supplying the kitchen in a fast-paced work environment.</li>
+                                         <li>After approximately one month, undertook and succeeded in training for all areas in the kitchen and FOH.</li>
+                                     </ul>
+                                 </div>
+                             </div>
                         </div>
                     </div>
-                </div> </section>
+                </div> 
+            </section>
 
             <section class="mb-8">
                  <div class="collapsible-header flex justify-between items-center cursor-pointer group" aria-expanded="false">
@@ -203,30 +210,30 @@
                     <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                  <div class="section-content mt-4 space-y-4">
-                     <article>
-                        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">CF1 Certification</h3>
+                      <article>
+                           <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">CF1 | UK financial services, ethics, and regulations</h3>
                         <p class="text-md text-slate-600 dark:text-slate-400">Chartered Insurance Institute</p>
                         <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb 2025</p>
-                    </article>
-                    <article>
-                        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Level 1 Award in Customer Contact Centre Operations</h3>
-                        <p class="text-md text-slate-600 dark:text-slate-400">Highfield</p>
-                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb 2024</p>
                     </article>
                     <article>
                         <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Level 2 Certificate in Team Leading Principles</h3>
                          <p class="text-md text-slate-600 dark:text-slate-400">Highfield</p>
                         <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb 2024</p>
                     </article>
+                    <article>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Level 1 Award in Customer Contact Centre Operations</h3>
+                        <p class="text-md text-slate-600 dark:text-slate-400">Highfield</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb 2024</p>
+                    </article>
                      <article>
                         <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Level 2 Food Safety Certification</h3>
-                         <p class="text-md text-slate-600 dark:text-slate-400"></p>
-                        <p class="text-sm text-slate-500 dark:text-slate-500 italic"></p>
+                         <p class="text-md text-slate-600 dark:text-slate-400">ServSafe International</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">2020</p>
                     </article>
                      <article>
                         <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Biology Studies (GCSE Equivalent)</h3>
                         <p class="text-md text-slate-600 dark:text-slate-400">Ntra. Sra. del Pilar School | Valencia</p>
-                         <p class="text-sm text-slate-500 dark:text-slate-500 italic"></p>
+                         <p class="text-sm text-slate-500 dark:text-slate-500 italic">Finished 2016</p>
                     </article>
                 </div> </section>
 
@@ -236,15 +243,20 @@
                     <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                  <div class="section-content mt-4 space-y-6">
-                    <article>
-                        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100"> Project Name 1 <span class="text-sm font-normal ml-2">[<a href="#" target="_blank" rel="noopener noreferrer">View Project/Code</a>]</span> </h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Technologies Used: [Technology 1, Technology 2, ...]</p>
-                        <p class="mt-2 leading-relaxed text-slate-600 dark:text-slate-400"> Concise project description, the problem it solves, and your role. Highlight key features or technical challenges overcome. </p>
+                     <article>
+                         <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100"> Rewind Studio <span class="text-sm font-normal ml-2">[<a href="#" target="_blank" rel="noopener noreferrer">Website is no longer active :(</a>]</span> </h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Created a brand and opened a music studio/shop in which clients</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">could bring their projects to life and purchase studio equipment.</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Individually budgeted project for every client. Dedicated craftsmanship  and attention to detail</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">to deliver the best possible product.</p>
+                        <p class="mt-2 leading-relaxed text-slate-600 dark:text-slate-400">Started on 2017 and closed before moving to England.</p>
                     </article>
                      <article>
-                         <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100"> Project Name 2 <span class="text-sm font-normal ml-2">[<a href="#" target="_blank" rel="noopener noreferrer">View Project/Code</a>]</span> </h3>
-                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Technologies Used: [Technology 1, Technology 2, ...]</p>
-                        <p class="mt-2 leading-relaxed text-slate-600 dark:text-slate-400"> Concise project description... </p>
+                          <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Programming journey<span class="text-sm font-normal ml-2">[<a href="#" target="_blank" rel="noopener noreferrer">Portfolio coming soon...</a>]</span> </h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Recently started learning basic HTML, JS and CSS. I discovered python and instantly fell in love with it.</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">That has really fast tracked my learning and further enhanced my digital skills.</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Currently learning data structures and how ML and LLM works.</p>
+                         <p class="mt-2 leading-relaxed text-slate-600 dark:text-slate-400">Enyoing my learning so far and eager to know more.</p>
                     </article>
                 </div> </section>
 
@@ -254,17 +266,22 @@
                     <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
                  <div class="section-content mt-4">
-                    <div class="flex flex-wrap gap-2">
-                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Research</span>
+                     <div class="flex flex-wrap gap-2">
+                          <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Research</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Critical thinking</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Problem solving</span>
                          <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Use of time</span>
-                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Work with others to support customers</span>
-                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Creative writing</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Work with others to guarantee the best outcomes</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Creativity</span>
                          <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Conversational skills</span>
-                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Adobe CC suite proficiency</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Adobe CC suite proficiency (most tools)</span>
                          <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Microsoft Office suite proficiency</span>
-                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Salesforce</span>
-                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">AWS (CRM)</span>
-                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Atlassian (CRM)</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">TCS BaNCs</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">AWS (CRM)</span> <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Atlassian (CRM)</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">HTML (Begginer)</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Python (Begginer, but getting good at it)</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Dart (Begginer)</span>
+
                     </div>
                 </div> </section>
 
@@ -318,20 +335,76 @@
 
 
             // --- Job Tab Logic ---
+             // (Updated sequential animation logic)
             const jobMenu = document.querySelector('.job-menu');
             const jobDetailContents = document.querySelectorAll('.job-detail-content');
             const jobTabButtons = document.querySelectorAll('.job-tab-button');
             let activeJobTargetId = null;
+            const animationDuration = 500; // Match CSS transition duration
+
             if (jobMenu) {
                 jobMenu.addEventListener('click', (e) => {
                     if (e.target.classList.contains('job-tab-button')) {
-                        const button = e.target; const targetId = button.getAttribute('data-target'); const targetContent = document.getElementById(targetId); const parentSectionContent = button.closest('.section-content');
-                        if (targetId === activeJobTargetId) { if (targetContent) { targetContent.classList.add('hidden'); targetContent.style.opacity = '0'; } button.classList.remove('active'); button.setAttribute('aria-selected', 'false'); activeJobTargetId = null;
-                        } else {
-                            jobDetailContents.forEach(content => { content.classList.add('hidden'); content.style.opacity = '0'; }); jobTabButtons.forEach(btn => { btn.classList.remove('active'); btn.setAttribute('aria-selected', 'false'); });
-                            if (targetContent) { targetContent.classList.remove('hidden'); setTimeout(() => { targetContent.style.opacity = '1'; }, 10); button.classList.add('active'); button.setAttribute('aria-selected', 'true'); activeJobTargetId = targetId; } else { activeJobTargetId = null; }
+                        const button = e.target;
+                        const targetId = button.getAttribute('data-target');
+                        const targetContent = document.getElementById(targetId);
+                        const parentSectionContent = button.closest('.section-content');
+
+                        const previouslyActiveButton = document.querySelector('.job-tab-button.active');
+                        const previouslyActiveContent = activeJobTargetId ? document.getElementById(activeJobTargetId) : null;
+
+                        // If clicking the currently active tab to hide it
+                        if (targetId === activeJobTargetId) {
+                            if (targetContent) {
+                                targetContent.classList.remove('opacity-100', 'translate-x-0'); // Start fade out
+                                targetContent.classList.add('opacity-0', 'translate-x-4');
+                                setTimeout(() => { targetContent.classList.add('hidden'); }, animationDuration);
+                            }
+                            button.classList.remove('active');
+                            button.setAttribute('aria-selected', 'false');
+                            activeJobTargetId = null;
                         }
-                        if (parentSectionContent && parentSectionContent.style.maxHeight !== '0px') { setTimeout(() => { const currentMaxHeight = parentSectionContent.style.maxHeight; parentSectionContent.style.maxHeight = 'none'; const newScrollHeight = parentSectionContent.scrollHeight; parentSectionContent.style.maxHeight = currentMaxHeight; parentSectionContent.style.maxHeight = newScrollHeight + "px"; }, 50); }
+                        // If clicking a new tab
+                        else {
+                            // Deactivate previous button
+                            if (previouslyActiveButton) {
+                                previouslyActiveButton.classList.remove('active');
+                                previouslyActiveButton.setAttribute('aria-selected', 'false');
+                            }
+                            // Function to show new content
+                            const showNewContent = () => {
+                                if (targetContent) {
+                                    targetContent.classList.remove('hidden'); // Remove hidden first
+                                    void targetContent.offsetWidth; // Trigger reflow
+                                    targetContent.classList.remove('opacity-0', 'translate-x-4'); // Start fade in
+                                    targetContent.classList.add('opacity-100', 'translate-x-0');
+                                    button.classList.add('active'); // Activate new button
+                                    button.setAttribute('aria-selected', 'true');
+                                    activeJobTargetId = targetId; // Set new active ID
+
+                                     // Adjust parent height after new content animation starts
+                                     if (parentSectionContent && parentSectionContent.style.maxHeight !== '0px') { setTimeout(() => { const currentMaxHeight = parentSectionContent.style.maxHeight; parentSectionContent.style.maxHeight = 'none'; const newScrollHeight = parentSectionContent.scrollHeight; parentSectionContent.style.maxHeight = currentMaxHeight; parentSectionContent.style.maxHeight = newScrollHeight + "px"; }, 50); }
+
+                                } else {
+                                    activeJobTargetId = null;
+                                }
+                            };
+
+                            // Fade out previous content (if any)
+                            if (previouslyActiveContent) {
+                                previouslyActiveContent.classList.remove('opacity-100', 'translate-x-0');
+                                previouslyActiveContent.classList.add('opacity-0', 'translate-x-4');
+                                // Add hidden AFTER fade out completes, then show new
+                                setTimeout(() => {
+                                    previouslyActiveContent.classList.add('hidden');
+                                    showNewContent(); // Show new content after hiding old
+                                }, animationDuration);
+                            }
+                            // If there was no previously active content, just fade in the new one
+                            else {
+                                 showNewContent();
+                            }
+                        }
                     }
                 });
             }
@@ -340,5 +413,4 @@
     </script>
 
 </body>
-</html>
-
+</html
