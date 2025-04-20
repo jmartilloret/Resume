@@ -1,276 +1,337 @@
 <!DOCTYPE html>
-<html lang="es" class=""> <head>
+<html lang="en" class=""> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Nombre - Currículum</title>
+    <title>Jonathan Lloret - Resume</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          darkMode: 'class', // Ensure the strategy is 'class'
+          theme: {
+            extend: {
+              // You can add theme extensions here if needed in the future
+            }
+          }
+        }
+      </script>
     <style>
-        /* Estilos base y personalizados */
+        /* Base and custom styles */
         body {
             font-family: 'Inter', sans-serif;
-            /* Transición suave para el cambio de color de fondo */
-            @apply transition-colors duration-300 ease-in-out;
         }
-        /* Estilo para enlaces en modo claro */
-        a {
-            @apply text-blue-600 hover:underline;
-        }
-        /* Estilo para enlaces en modo oscuro */
-        .dark a {
-             @apply text-blue-400 hover:underline;
-        }
-        /* Estilo opcional para mejorar la impresión */
+        /* Base link style */
+        a { color: #0ea5e9; /* text-sky-600 */ }
+        a:hover { text-decoration: underline; }
+        .dark a { color: #38bdf8; /* text-sky-400 */ }
+
+        /* Print styles */
         @media print {
-            body {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-            .no-print {
-                display: none;
-            }
-            /* Forzar fondo blanco y texto negro al imprimir */
-            body, .resume-container {
-                 background-color: #ffffff !important;
-                 color: #000000 !important;
-            }
-            header {
-                 background-color: #1f2937 !important; /* Mantener cabecera oscura si se desea */
-                 color: #ffffff !important;
-            }
-            header a {
-                color: #ffffff !important;
-            }
-            section h2 {
-                border-color: #d1d5db !important; /* Borde gris claro */
-            }
-            .dark section h2 {
-                 border-color: #4b5563 !important; /* Borde gris oscuro */
-            }
-             span.skill-tag {
-                background-color: #e5e7eb !important; /* Fondo gris claro para etiquetas */
-                color: #1f2937 !important; /* Texto oscuro para etiquetas */
-             }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print { display: none; }
+            body, .resume-container { background-color: #ffffff !important; color: #000000 !important; }
+            header { background-color: #1e293b !important; color: #ffffff !important; }
+            header a { color: #ffffff !important; }
+            .section-content, .job-detail-content { display: block !important; max-height: none !important; } /* Ensure content visible */
+            .collapsible-icon, .job-menu { display: none !important; } /* Hide icons and job menu */
+            .job-detail-content article { margin-bottom: 1rem !important; padding-bottom: 0.5rem !important; border-bottom: 1px solid #e2e8f0 !important; } /* Add separators for print */
+             .job-detail-content article:last-child { border-bottom: none !important; }
+            span.skill-tag { background-color: #f1f5f9 !important; color: #1e293b !important; }
         }
-        /* Iconos SVG para el toggle (simplificado) */
-        .icon {
-            display: inline-block;
-            width: 1.25em;
-            height: 1.25em;
-            stroke-width: 1.5;
-            stroke: currentColor;
-            fill: none;
-            vertical-align: middle;
-        }
+        /* Icons */
+        .icon { display: inline-block; width: 1.25em; height: 1.25em; stroke-width: 1.5; stroke: currentColor; fill: none; vertical-align: middle; }
+        .hidden { display: none; }
+
+         /* Smooth transition for collapsible sections */
+         .section-content {
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+            max-height: 0; /* Collapsed by default */
+         }
+         /* Transition for job details visibility (opacity) */
+         .job-detail-content {
+            transition: opacity 0.3s ease-in-out;
+         }
+
+         /* Active tab button style */
+         .job-tab-button.active {
+             @apply bg-sky-600 text-white dark:bg-sky-500;
+         }
+
     </style>
-    <link rel="preconnect" href="https://rsms.me/">
-    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+     <link rel="preconnect" href="https://rsms.me/">
+     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 p-4 md:p-8 lg:p-12">
+<body class="bg-slate-50 dark:bg-slate-950 p-4 md:p-8 lg:p-12 transition-colors duration-300 ease-in-out" style="font-family: 'Inter', sans-serif;">
 
-    <div class="resume-container max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-2xl rounded-lg overflow-hidden relative">
+    <div class="resume-container max-w-4xl mx-auto bg-white dark:bg-slate-800 shadow-xl rounded-lg overflow-hidden relative">
 
-        <button id="theme-toggle" type="button" class="no-print absolute top-4 right-4 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 transition-colors duration-200">
-            <svg id="theme-toggle-dark-icon" class="icon hidden" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 008.307-4.498z" />
-            </svg>
-            <svg id="theme-toggle-light-icon" class="icon hidden" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-            </svg>
+        <button id="theme-toggle" type="button" class="no-print absolute top-4 right-4 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 focus:outline-none focus:ring-4 focus:ring-slate-200 dark:focus:ring-slate-700 rounded-lg text-sm p-2.5 transition-colors duration-200 z-10">
+            <svg id="theme-toggle-dark-icon" class="icon hidden" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 008.307-4.498z" /> </svg>
+            <svg id="theme-toggle-light-icon" class="icon hidden" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /> </svg>
         </button>
 
-        <header class="bg-gray-800 dark:bg-gray-900 text-white p-6 md:p-8 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold">Tu Nombre Completo</h1>
-            <p class="text-lg md:text-xl text-gray-300 dark:text-gray-400 mt-1">Título Profesional / Rol Deseado</p>
-            <div class="mt-4 text-sm md:text-base text-gray-400 dark:text-gray-500 flex flex-wrap justify-center gap-x-4 gap-y-2">
-                <span><a href="mailto:tu.email@ejemplo.com" class="text-blue-300 dark:text-blue-400 hover:text-white dark:hover:text-blue-300">tu.email@ejemplo.com</a></span>
+        <header class="bg-slate-800 dark:bg-slate-900 text-white p-6 md:p-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold">JONATHAN LLORET</h1>
+            <p class="text-lg md:text-xl text-slate-300 dark:text-slate-400 mt-1">CONTACT CENTRE ADVISOR / SPECIALIST</p>
+            <div class="mt-4 text-sm md:text-base text-slate-400 dark:text-slate-500 flex flex-wrap justify-center gap-x-4 gap-y-2">
+                <span><a href="mailto:lloret.jonathan@icloud.com" class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300">lloret.jonathan@icloud.com</a></span>
                 <span class="hidden sm:inline">|</span>
-                <span><a href="tel:+1234567890" class="text-blue-300 dark:text-blue-400 hover:text-white dark:hover:text-blue-300">(123) 456-7890</a></span>
+                <span><a href="tel:07731835212" class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300">07731835212</a></span>
                 <span class="hidden sm:inline">|</span>
-                <span>Tu Ciudad, País</span>
+                <span>Liverpool</span>
                 <span class="hidden sm:inline">|</span>
-                <span><a href="https://www.linkedin.com/in/tu-perfil/" target="_blank" rel="noopener noreferrer" class="text-blue-300 dark:text-blue-400 hover:text-white dark:hover:text-blue-300">LinkedIn</a></span>
+                <span><a href="#" target="_blank" rel="noopener noreferrer" class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300">LinkedIn</a></span>
                 <span class="hidden sm:inline">|</span>
-                <span><a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" class="text-blue-300 dark:text-blue-400 hover:text-white dark:hover:text-blue-300">GitHub</a></span>
-                </div>
+                <span><a href="https://github.com/jmartilloret" target="_blank" rel="noopener noreferrer" class="text-sky-300 dark:text-sky-400 hover:text-white dark:hover:text-sky-300">GitHub</a></span>
+            </div>
         </header>
 
-        <main class="p-6 md:p-8 text-gray-700 dark:text-gray-300">
+        <main class="p-6 md:p-8 text-slate-700 dark:text-slate-300">
 
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-700 pb-2 mb-4">Resumen Profesional</h2>
-                <p class="leading-relaxed">
-                    Desarrollador [Tu Especialidad] con X años de experiencia en [Tecnologías Clave]. Apasionado por crear soluciones eficientes y escalables. Buscando una oportunidad desafiante en [Tipo de Empresa o Industria] donde pueda aplicar mis habilidades en [Habilidad 1] y [Habilidad 2].
+                <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-4">Professional Summary</h2>
+                <p class="leading-relaxed text-slate-600 dark:text-slate-400">
+                    Having finished my Level 1 Diploma in Contact Centre Operations, I am eager to join a home-based Customer Service Advisor role. I believe I have the equipment, skills, and ability to perform this role effectively. I am a team player who can get along with anyone. I am also well-organised and punctual. Furthermore, I always aim to provide high-quality service and commitment to my customers. With my excellent people skills, I strongly feel that I can add value to any workforce. On a personal level, I would like to move out to the countryside and a remote role would allow me to achieve personal goals in life.
                 </p>
             </section>
 
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-700 pb-2 mb-4">Experiencia Laboral</h2>
+                <div class="collapsible-header flex justify-between items-center cursor-pointer group mb-4" aria-expanded="false">
+                    <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Work Experience</h2>
+                    <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <div class="section-content">
+                    <div class="job-menu flex flex-wrap gap-2 mb-4 border-b border-slate-200 dark:border-slate-700 pb-2" role="tablist">
+                        <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-diligenta" role="tab" aria-selected="false">Diligenta</button>
+                        <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-dazn" role="tab" aria-selected="false">DAZN (Advisor)</button>
+                        <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-tedi" role="tab" aria-selected="false">TEDi (Shopkeeper)</button>
+                        <button type="button" class="job-tab-button px-3 py-1 text-sm rounded-md bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 transition-colors" data-target="job-taco-bell" role="tab" aria-selected="false">Taco Bell (Progression)</button>
+                    </div>
 
-                <article class="mb-6">
-                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Nombre del Puesto</h3>
-                    <p class="text-md text-gray-600 dark:text-gray-400">Nombre de la Empresa | Ciudad, País</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Mes Año Inicio – Mes Año Fin (o "Presente")</p>
-                    <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-gray-600 dark:text-gray-400">
-                        <li>Logro o responsabilidad clave 1. Utilicé [Tecnología/Habilidad] para [Resultado Cuantificable si es posible].</li>
-                        <li>Logro o responsabilidad clave 2. Colaboré con equipos para [Acción].</li>
-                        <li>Logro o responsabilidad clave 3. Desarrollé e implementé [Característica/Proyecto].</li>
-                        </ul>
-                </article>
-
-                <article class="mb-6">
-                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Nombre del Puesto Anterior</h3>
-                    <p class="text-md text-gray-600 dark:text-gray-400">Nombre de la Empresa Anterior | Ciudad, País</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Mes Año Inicio – Mes Año Fin</p>
-                    <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-gray-600 dark:text-gray-400">
-                        <li>Logro o responsabilidad clave 1.</li>
-                        <li>Logro o responsabilidad clave 2.</li>
-                        </ul>
-                </article>
-
-                </section>
-
-             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-700 pb-2 mb-4">Proyectos Destacados</h2>
-
-                <article class="mb-6">
-                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
-                        Nombre del Proyecto 1
-                        <span class="text-sm font-normal ml-2">[<a href="URL_DEL_PROYECTO_O_REPO" target="_blank" rel="noopener noreferrer">Ver Proyecto/Código</a>]</span>
-                    </h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Tecnologías Utilizadas: [Tecnología 1, Tecnología 2, ...]</p>
-                    <p class="mt-2 leading-relaxed text-gray-600 dark:text-gray-400">
-                        Descripción concisa del proyecto, el problema que resuelve y tu rol en él. Destaca las características principales o los desafíos técnicos superados.
-                    </p>
-                    </article>
-
-                <article class="mb-6">
-                     <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
-                        Nombre del Proyecto 2
-                        <span class="text-sm font-normal ml-2">[<a href="URL_DEL_PROYECTO_O_REPO" target="_blank" rel="noopener noreferrer">Ver Proyecto/Código</a>]</span>
-                    </h3>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Tecnologías Utilizadas: [Tecnología 1, Tecnología 2, ...]</p>
-                    <p class="mt-2 leading-relaxed text-gray-600 dark:text-gray-400">
-                        Descripción concisa del proyecto.
-                    </p>
-                </article>
-
-                </section>
+                    <div class="job-details-container mt-4">
+                         <div id="job-diligenta" class="job-detail-content hidden" role="tabpanel" aria-labelledby="job-tab-diligenta">
+                            <article>
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Contact Centre Specialist (Technical role)</h3>
+                                <p class="text-md text-slate-600 dark:text-slate-400">(Previously: Contact Centre Advisor)</p>
+                                <p class="text-md text-slate-600 dark:text-slate-400">Diligenta | Liverpool</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">April 2024 - Present</p>
+                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                    <li></li>
+                                    </ul>
+                            </article>
+                        </div>
+                        <div id="job-dazn" class="job-detail-content hidden" role="tabpanel" aria-labelledby="job-tab-dazn">
+                            <article>
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Customer Service Advisor</h3>
+                                <p class="text-md text-slate-600 dark:text-slate-400">DAZN (through Assist Digital CRM) | Valencia</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb '23 – Sep '23 (seasonal role)</p>
+                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                    <li>Use of Salesforce, AWS and Atlassian CRM systems to successfully manage customer accounts.</li>
+                                    <li>Inbound contact by live chat, handling 4 cases at a time. Outbound contact by e-mail following-up on customers needs.</li>
+                                    <li>Regularly checked for escalated cases and handled them (Refunds, Subscription changes and new error codes).</li>
+                                    <li>Undertook training on sports content and licensing across different countries in Europe.</li>
+                                </ul>
+                            </article>
+                        </div>
+                        <div id="job-tedi" class="job-detail-content hidden" role="tabpanel" aria-labelledby="job-tab-tedi">
+                             <article>
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Shopkeeper</h3>
+                                <p class="text-md text-slate-600 dark:text-slate-400">TEDi stores | Valencia, Spain</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">Dec '22 – Feb '23 (seasonal role)</p>
+                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                    <li>Back of house warehouse duties, loading outbound and unpacking inbound pallets.</li>
+                                    <li>Kept the shop clean to give customers the best experience in each and every visit.</li>
+                                    <li>Greeted customers according to company standards.</li>
+                                    <li>Kept a record of sales and cash on the tills at closing.</li>
+                                    <li>Managed refunds and complaints.</li>
+                                    <li>Looked out for shoplifters and looked out for the safety of colleagues and other customers.</li>
+                                </ul>
+                             </article>
+                        </div>
+                        <div id="job-taco-bell" class="job-detail-content hidden space-y-6" role="tabpanel" aria-labelledby="job-tab-taco-bell">
+                             <article>
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Restaurant General Manager</h3>
+                                <p class="text-md text-slate-600 dark:text-slate-400">Taco Bell (Taco-time Ltd, Adil Group of companies) | London, UK</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">~Jan '22 – Jul '22 (Estimated)</p>
+                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                     <li>Given the chance to take RGM's place or open a new store in Woodgreen; chose the latter.</li>
+                                     <li>Trained the new management team, leading the store to outperform expectations.</li>
+                                     <li>Managed a challenging project with tight deadlines, requiring frequent problem-solving.</li>
+                                </ul>
+                             </article>
+                              <article>
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Assistant Manager</h3>
+                                <p class="text-md text-slate-600 dark:text-slate-400">Taco Bell (Taco-time Ltd, Adil Group of companies) | London, UK</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">~Jun '21 – Dec '21 (Estimated)</p>
+                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                    <li>Promoted by Area Coach.</li>
+                                     <li>Mentored by RGM for over 6 months in preparation for management responsibilities.</li>
+                                     </ul>
+                             </article>
+                              <article>
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Team Leader</h3>
+                                <p class="text-md text-slate-600 dark:text-slate-400">Taco Bell (Taco-time Ltd, Adil Group of companies) | London, UK</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb '20 – May '21 (Estimated)</p>
+                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                     <li>Promoted to Team Leader in Feb '20.</li>
+                                     <li>Part of the reduced team brought back from furlough after the lockdown.</li>
+                                     <li>Regularly delivered the best customer service and ensured company standards were met.</li>
+                                     <li>Passed all audits during this period.</li>
+                                </ul>
+                             </article>
+                              <article>
+                                <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Kitchen / Fryer Staff</h3>
+                                <p class="text-md text-slate-600 dark:text-slate-400">Taco Bell (Taco-time Ltd, Adil Group of companies) | London, UK</p>
+                                <p class="text-sm text-slate-500 dark:text-slate-500 italic">Dec '19 – Feb '20 (Estimated)</p>
+                                <ul class="list-disc list-inside mt-2 leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                                     <li>Started in the fryer station, cooking and supplying the kitchen in a fast-paced work environment.</li>
+                                     <li>After approximately one month, undertook and succeeded in training for all areas in the kitchen and FOH.</li>
+                                </ul>
+                             </article>
+                        </div>
+                    </div>
+                </div> </section>
 
             <section class="mb-8">
-                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-700 pb-2 mb-4">Educación</h2>
-
-                <article class="mb-4">
-                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Nombre de tu Título (Ej: Ingeniería Informática)</h3>
-                    <p class="text-md text-gray-600 dark:text-gray-400">Nombre de la Universidad o Institución | Ciudad, País</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Año de Graduación (o "En Curso")</p>
+                 <div class="collapsible-header flex justify-between items-center cursor-pointer group" aria-expanded="false">
+                    <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Education & Training</h2>
+                    <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                 <div class="section-content mt-4 space-y-4">
+                     <article>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">CF1 Certification</h3>
+                        <p class="text-md text-slate-600 dark:text-slate-400">Chartered Insurance Institute</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb 2025</p>
                     </article>
+                    <article>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Level 1 Award in Customer Contact Centre Operations</h3>
+                        <p class="text-md text-slate-600 dark:text-slate-400">Highfield</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb 2024</p>
+                    </article>
+                    <article>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Level 2 Certificate in Team Leading Principles</h3>
+                         <p class="text-md text-slate-600 dark:text-slate-400">Highfield</p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Feb 2024</p>
+                    </article>
+                     <article>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Level 2 Food Safety Certification</h3>
+                         <p class="text-md text-slate-600 dark:text-slate-400"></p>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic"></p>
+                    </article>
+                     <article>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100">Biology Studies (GCSE Equivalent)</h3>
+                        <p class="text-md text-slate-600 dark:text-slate-400">Ntra. Sra. del Pilar School | Valencia</p>
+                         <p class="text-sm text-slate-500 dark:text-slate-500 italic"></p>
+                    </article>
+                    </div> </section>
 
-                 <article class="mb-4">
-                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Nombre de Certificación o Curso Relevante</h3>
-                    <p class="text-md text-gray-600 dark:text-gray-400">Institución Emisora</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-500 italic">Año de Obtención</p>
-                </article>
+             <section class="mb-8">
+                 <div class="collapsible-header flex justify-between items-center cursor-pointer group" aria-expanded="false">
+                    <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Featured Projects</h2>
+                    <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                 <div class="section-content mt-4 space-y-6">
+                    <article>
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100"> Project Name 1 <span class="text-sm font-normal ml-2">[<a href="#" target="_blank" rel="noopener noreferrer">View Project/Code</a>]</span> </h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Technologies Used: [Technology 1, Technology 2, ...]</p>
+                        <p class="mt-2 leading-relaxed text-slate-600 dark:text-slate-400"> Concise project description, the problem it solves, and your role. Highlight key features or technical challenges overcome. </p>
+                    </article>
+                     <article>
+                         <h3 class="text-xl font-semibold text-slate-900 dark:text-slate-100"> Project Name 2 <span class="text-sm font-normal ml-2">[<a href="#" target="_blank" rel="noopener noreferrer">View Project/Code</a>]</span> </h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-500 italic">Technologies Used: [Technology 1, Technology 2, ...]</p>
+                        <p class="mt-2 leading-relaxed text-slate-600 dark:text-slate-400"> Concise project description... </p>
+                    </article>
+                </div> </section>
 
-                </section>
-
-            <section>
-                <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200 border-b-2 border-gray-300 dark:border-gray-700 pb-2 mb-4">Habilidades Técnicas</h2>
-                <div class="flex flex-wrap gap-2">
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Python</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">JavaScript</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">HTML5</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">CSS3</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Tailwind CSS</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">React</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Node.js</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Flask/Django</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">SQL</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">NoSQL (MongoDB)</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Git</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Docker</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">AWS/GCP/Azure</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Flutter</span>
-                    <span class="skill-tag bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Dart</span>
+            <section class="mb-8">
+                 <div class="collapsible-header flex justify-between items-center cursor-pointer group" aria-expanded="false">
+                    <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Core Skills</h2>
+                    <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                 <div class="section-content mt-4">
+                    <div class="flex flex-wrap gap-2">
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Research</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Use of time</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Work with others to support customers</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Creative writing</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Conversational skills</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Adobe CC suite proficiency</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Microsoft Office suite proficiency</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Salesforce</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">AWS (CRM)</span>
+                         <span class="skill-tag bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium px-3 py-1 rounded-full transition-colors duration-200">Atlassian (CRM)</span>
                     </div>
-                 </section>
+                </div> </section>
+
+             <section>
+                 <div class="collapsible-header flex justify-between items-center cursor-pointer group" aria-expanded="false">
+                    <h2 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">Hobbies & Interests</h2>
+                    <svg class="collapsible-icon w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-transform duration-300 transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                 <div class="section-content mt-4">
+                     <ul class="list-disc list-inside leading-relaxed space-y-1 text-slate-600 dark:text-slate-400">
+                         <li>World politics.</li>
+                         <li>All things audio (design, record, sample, produce, mix and master).</li>
+                         <li>Digital content (I often edit videos or mix songs for content creators/artists).</li>
+                         <li>PC budgeting and installation, repairs.</li>
+                     </ul>
+                 </div> </section>
 
         </main>
 
-        <footer class="text-center text-sm text-gray-500 dark:text-gray-400 p-4 border-t border-gray-200 dark:border-gray-700">
-            Última actualización: <span id="last-updated">Abril 2025</span>
+        <footer class="text-center text-sm text-slate-500 dark:text-slate-400 p-4 border-t border-slate-200 dark:border-slate-700">
+             Last updated: <span id="last-updated">April 2025</span>
         </footer>
 
     </div>
 
     <script>
-        // Añadido para asegurar que el script se ejecuta después de cargar el DOM
+        // Execute script after DOM is loaded
         document.addEventListener('DOMContentLoaded', (event) => {
-            console.log("DOM fully loaded and parsed"); // Mensaje de depuración
 
-            // Selectores de iconos y botón
+            // --- Dark Mode Logic ---
             const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
             const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
             const themeToggleButton = document.getElementById('theme-toggle');
+            if (themeToggleDarkIcon && themeToggleLightIcon && themeToggleButton) {
+                const updateIcons = (isDarkMode) => { if (isDarkMode) { themeToggleLightIcon.classList.remove('hidden'); themeToggleDarkIcon.classList.add('hidden'); } else { themeToggleDarkIcon.classList.remove('hidden'); themeToggleLightIcon.classList.add('hidden'); } };
+                let isDarkMode = localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                const applyTheme = (darkMode) => { if (darkMode) { document.documentElement.classList.add('dark'); } else { document.documentElement.classList.remove('dark'); } updateIcons(darkMode); }
+                applyTheme(isDarkMode);
+                themeToggleButton.addEventListener('click', () => { isDarkMode = !isDarkMode; localStorage.setItem('color-theme', isDarkMode ? 'dark' : 'light'); applyTheme(isDarkMode); });
+            } else { console.error("Dark mode toggle elements not found!"); }
 
-            // Verificar si los elementos existen
-            if (!themeToggleDarkIcon || !themeToggleLightIcon || !themeToggleButton) {
-                console.error("Theme toggle elements not found!");
-                return; // Salir si no se encuentran los elementos
-            }
-             console.log("Theme toggle elements found."); // Mensaje de depuración
 
-            // Función para actualizar iconos
-            const updateIcons = (isDarkMode) => {
-                 console.log("Updating icons. isDarkMode:", isDarkMode); // Mensaje de depuración
-                if (isDarkMode) {
-                    themeToggleLightIcon.classList.remove('hidden');
-                    themeToggleDarkIcon.classList.add('hidden');
-                } else {
-                    themeToggleDarkIcon.classList.remove('hidden');
-                    themeToggleLightIcon.classList.add('hidden');
-                }
-            };
-
-            // Comprobar preferencia guardada o preferencia del sistema al cargar
-            let isDarkMode = localStorage.getItem('color-theme') === 'dark' ||
-                             (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-
-             console.log("Initial check: isDarkMode:", isDarkMode); // Mensaje de depuración
-
-            // Aplicar tema inicial y actualizar icono
-            if (isDarkMode) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-            updateIcons(isDarkMode);
-             console.log("Initial theme set."); // Mensaje de depuración
-
-            // Event listener para el botón
-            themeToggleButton.addEventListener('click', () => {
-                 console.log("Theme toggle button clicked."); // Mensaje de depuración
-                // Alternar estado
-                isDarkMode = !isDarkMode;
-                 console.log("Toggling theme. New isDarkMode:", isDarkMode); // Mensaje de depuración
-
-                // Actualizar clase en <html>
-                document.documentElement.classList.toggle('dark', isDarkMode);
-
-                // Guardar preferencia en localStorage
-                localStorage.setItem('color-theme', isDarkMode ? 'dark' : 'light');
-                 console.log("Theme preference saved to localStorage:", localStorage.getItem('color-theme')); // Mensaje de depuración
-
-                // Actualizar icono
-                updateIcons(isDarkMode);
+            // --- Collapsible Section Logic ---
+            const mainHeaders = document.querySelectorAll('.collapsible-header');
+            mainHeaders.forEach(header => {
+                const content = header.nextElementSibling; const icon = header.querySelector('.collapsible-icon'); if (!content || !icon || !content.classList.contains('section-content')) return;
+                content.style.maxHeight = '0px'; header.setAttribute('aria-expanded', 'false');
+                header.addEventListener('click', (e) => { if (e.target.closest('.job-tab-button')) return; const isExpanded = header.getAttribute('aria-expanded') === 'true'; if (isExpanded) { content.style.maxHeight = '0px'; icon.classList.remove('rotate-180'); header.setAttribute('aria-expanded', 'false'); } else { content.style.maxHeight = content.scrollHeight + "px"; icon.classList.add('rotate-180'); header.setAttribute('aria-expanded', 'true'); } });
+                content.addEventListener('transitionend', () => { if (header.getAttribute('aria-expanded') === 'true') { content.style.maxHeight = 'none'; } });
             });
 
-            // Opcional: Actualizar fecha de última actualización dinámicamente
-            // const lastUpdatedSpan = document.getElementById('last-updated');
-            // if (lastUpdatedSpan) {
-            //     const now = new Date();
-            //     const options = { year: 'numeric', month: 'long' };
-            //     lastUpdatedSpan.textContent = now.toLocaleDateString('es-ES', options);
-            // }
-        }); // Fin del DOMContentLoaded listener
 
+            // --- Job Tab Logic ---
+            const jobMenu = document.querySelector('.job-menu');
+            const jobDetailContents = document.querySelectorAll('.job-detail-content');
+            const jobTabButtons = document.querySelectorAll('.job-tab-button');
+            let activeJobTargetId = null;
+            if (jobMenu) {
+                jobMenu.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('job-tab-button')) {
+                        const button = e.target; const targetId = button.getAttribute('data-target'); const targetContent = document.getElementById(targetId); const parentSectionContent = button.closest('.section-content');
+                        if (targetId === activeJobTargetId) { if (targetContent) { targetContent.classList.add('hidden'); targetContent.style.opacity = '0'; } button.classList.remove('active'); button.setAttribute('aria-selected', 'false'); activeJobTargetId = null;
+                        } else {
+                            jobDetailContents.forEach(content => { content.classList.add('hidden'); content.style.opacity = '0'; }); jobTabButtons.forEach(btn => { btn.classList.remove('active'); btn.setAttribute('aria-selected', 'false'); });
+                            if (targetContent) { targetContent.classList.remove('hidden'); setTimeout(() => { targetContent.style.opacity = '1'; }, 10); button.classList.add('active'); button.setAttribute('aria-selected', 'true'); activeJobTargetId = targetId; } else { activeJobTargetId = null; }
+                        }
+                        if (parentSectionContent && parentSectionContent.style.maxHeight !== '0px') { setTimeout(() => { const currentMaxHeight = parentSectionContent.style.maxHeight; parentSectionContent.style.maxHeight = 'none'; const newScrollHeight = parentSectionContent.scrollHeight; parentSectionContent.style.maxHeight = currentMaxHeight; parentSectionContent.style.maxHeight = newScrollHeight + "px"; }, 50); }
+                    }
+                });
+            }
+
+        }); // End DOMContentLoaded
     </script>
 
 </body>
