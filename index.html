@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Nombre - Currículum</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Puedes añadir CSS personalizado aquí si es necesario, pero Tailwind se encarga de la mayoría */
+        body {
+            font-family: 'Inter', sans-serif; /* Fuente limpia por defecto con Tailwind */
+        }
+        /* Estilo para enlaces */
+        a {
+            color: #2563eb; /* Azul de Tailwind */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        /* Estilo opcional para mejorar la impresión */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact; /* Mantiene colores de fondo al imprimir */
+                print-color-adjust: exact;
+            }
+            .no-print {
+                display: none; /* Oculta elementos no deseados al imprimir */
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://rsms.me/">
+     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+     <script>
+        // Configuración opcional de Tailwind (si necesitas personalizar temas)
+        // tailwind.config = {
+        //   theme: {
+        //     extend: {
+        //       colors: {
+        //         clifford: '#da373d',
+        //       }
+        //     }
+        //   }
+        // }
+      </script>
+</head>
+<body class="bg-gray-100 p-4 md:p-8 lg:p-12">
+
+    <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <header class="bg-gray-800 text-white p-6 md:p-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold">Tu Nombre Completo</h1>
+            <p class="text-lg md:text-xl text-gray-300 mt-1">Título Profesional / Rol Deseado</p>
+            <div class="mt-4 text-sm md:text-base text-gray-400 flex flex-wrap justify-center gap-x-4 gap-y-2">
+                <span><a href="mailto:tu.email@ejemplo.com" class="hover:text-white">tu.email@ejemplo.com</a></span>
+                <span>|</span>
+                <span><a href="tel:+1234567890" class="hover:text-white">(123) 456-7890</a></span>
+                <span>|</span>
+                <span>Tu Ciudad, País</span>
+                <span>|</span>
+                <span><a href="https://www.linkedin.com/in/tu-perfil/" target="_blank" rel="noopener noreferrer" class="hover:text-white">LinkedIn</a></span>
+                <span>|</span>
+                <span><a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer" class="hover:text-white">GitHub</a></span>
+                </div>
+        </header>
+
+        <main class="p-6 md:p-8">
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4">Resumen Profesional</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    Desarrollador [Tu Especialidad] con X años de experiencia en [Tecnologías Clave]. Apasionado por crear soluciones eficientes y escalables. Buscando una oportunidad desafiante en [Tipo de Empresa o Industria] donde pueda aplicar mis habilidades en [Habilidad 1] y [Habilidad 2].
+                </p>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4">Experiencia Laboral</h2>
+
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800">Nombre del Puesto</h3>
+                    <p class="text-md text-gray-600">Nombre de la Empresa | Ciudad, País</p>
+                    <p class="text-sm text-gray-500 italic">Mes Año Inicio – Mes Año Fin (o "Presente")</p>
+                    <ul class="list-disc list-inside mt-2 text-gray-600 leading-relaxed space-y-1">
+                        <li>Logro o responsabilidad clave 1. Utilicé [Tecnología/Habilidad] para [Resultado Cuantificable si es posible].</li>
+                        <li>Logro o responsabilidad clave 2. Colaboré con equipos para [Acción].</li>
+                        <li>Logro o responsabilidad clave 3. Desarrollé e implementé [Característica/Proyecto].</li>
+                        </ul>
+                </article>
+
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800">Nombre del Puesto Anterior</h3>
+                    <p class="text-md text-gray-600">Nombre de la Empresa Anterior | Ciudad, País</p>
+                    <p class="text-sm text-gray-500 italic">Mes Año Inicio – Mes Año Fin</p>
+                    <ul class="list-disc list-inside mt-2 text-gray-600 leading-relaxed space-y-1">
+                        <li>Logro o responsabilidad clave 1.</li>
+                        <li>Logro o responsabilidad clave 2.</li>
+                        </ul>
+                </article>
+
+                </section>
+
+             <section class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4">Proyectos Destacados</h2>
+
+                <article class="mb-6">
+                    <h3 class="text-xl font-semibold text-gray-800">
+                        Nombre del Proyecto 1
+                        <span class="text-sm font-normal text-blue-600 ml-2">[<a href="URL_DEL_PROYECTO_O_REPO" target="_blank" rel="noopener noreferrer">Ver Proyecto/Código</a>]</span>
+                    </h3>
+                    <p class="text-sm text-gray-500 italic">Tecnologías Utilizadas: [Tecnología 1, Tecnología 2, ...]</p>
+                    <p class="mt-2 text-gray-600 leading-relaxed">
+                        Descripción concisa del proyecto, el problema que resuelve y tu rol en él. Destaca las características principales o los desafíos técnicos superados.
+                    </p>
+                </article>
+
+                <article class="mb-6">
+                     <h3 class="text-xl font-semibold text-gray-800">
+                        Nombre del Proyecto 2
+                        <span class="text-sm font-normal text-blue-600 ml-2">[<a href="URL_DEL_PROYECTO_O_REPO" target="_blank" rel="noopener noreferrer">Ver Proyecto/Código</a>]</span>
+                    </h3>
+                    <p class="text-sm text-gray-500 italic">Tecnologías Utilizadas: [Tecnología 1, Tecnología 2, ...]</p>
+                    <p class="mt-2 text-gray-600 leading-relaxed">
+                        Descripción concisa del proyecto.
+                    </p>
+                </article>
+
+                </section>
+
+            <section class="mb-8">
+                <h2 class="text-2xl font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4">Educación</h2>
+
+                <article class="mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Nombre de tu Título (Ej: Ingeniería Informática)</h3>
+                    <p class="text-md text-gray-600">Nombre de la Universidad o Institución | Ciudad, País</p>
+                    <p class="text-sm text-gray-500 italic">Año de Graduación (o "En Curso")</p>
+                    </article>
+
+                 <article class="mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Nombre de Certificación o Curso Relevante</h3>
+                    <p class="text-md text-gray-600">Institución Emisora</p>
+                    <p class="text-sm text-gray-500 italic">Año de Obtención</p>
+                </article>
+
+                </section>
+
+            <section>
+                <h2 class="text-2xl font-semibold text-gray-700 border-b-2 border-gray-300 pb-2 mb-4">Habilidades Técnicas</h2>
+                <div class="flex flex-wrap gap-x-4 gap-y-2">
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Python</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">JavaScript</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">HTML5</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">CSS3</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Tailwind CSS</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">React</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Node.js</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Flask/Django</span>
+                     <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">SQL</span>
+                     <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">NoSQL (MongoDB)</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Git</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Docker</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">AWS/GCP/Azure</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Flutter</span>
+                    <span class="bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">Dart</span>
+                    </div>
+                 </section>
+
+        </main>
+
+        <footer class="text-center text-sm text-gray-500 p-4 border-t border-gray-200">
+            Última actualización: Abril 2025
+        </footer>
+
+    </div>
+
+</body>
+</html>
