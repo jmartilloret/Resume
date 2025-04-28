@@ -7,34 +7,35 @@
         content="width=device-width, initial-scale=1.0"
     >
     <title>Jonathan Lloret - Resume</title>
+    <link rel="icon" type="image/x-icon" href="jlmlogo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-          darkMode: 'class', // Asegurar que la estrategia es 'class'
+          darkMode: 'class',  
           theme: {
             extend: {
-              // Puedes añadir extensiones de tema aquí si es necesario en el futuro
-            }
+               
+            }            /* no need to put anything here */
           }
         }
       </script>
     <style>
-        /* Estilos base y personalizados */
+        
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Estilo base para enlaces */
+        /* Estilo base para enlaces -> idle -> hover */
         a { 
-            color: #0ea5e9; /* text-sky-600 */ 
+            color: #0ea5e9;  
         }
         a:hover { 
             text-decoration: underline; 
         }
         .dark a { 
-            color: #38bdf8; /* text-sky-400 */ 
+            color: #38bdf8;   
         }
 
-        /* Estilos de impresión */
+ 
         @media print {
             body { 
                 -webkit-print-color-adjust: exact; 
@@ -54,7 +55,7 @@
             header a:not(.download-button) { 
                 color: #ffffff !important; 
             }
-            /* Asegurar que el contenido colapsable sea visible al imprimir */
+ 
             .section-content, .job-detail-content { 
                 display: block !important; 
                 max-height: none !important; 
@@ -62,11 +63,11 @@
                 opacity: 1 !important; 
                 transform: none !important; 
             } 
-             /* Ocultar iconos y menú de trabajos al imprimir */
+ 
             .collapsible-icon, .job-menu { 
                 display: none !important; 
             } 
-            /* Añadir separadores y prevenir saltos dentro de roles al imprimir */
+ 
             .job-detail-content .role-block { 
                 margin-bottom: 1rem !important; 
                 padding-bottom: 0.5rem !important; 
@@ -81,7 +82,7 @@
                 color: #1e293b !important; 
             }
         }
-        /* Iconos */
+         
         .icon { 
             display: inline-block; 
             width: 1.25em; 
@@ -95,24 +96,24 @@
             display: none; 
         }
 
-         /* Transición suave para secciones colapsables */
+         /*  secciones colapsables */
          .section-content {
             overflow: hidden;
             transition: max-height 0.4s ease-in-out;
-            max-height: 0; /* Colapsado por defecto */
+            max-height: 0;   
          }
-         /* Transición para visibilidad de detalles de trabajo (opacidad) - aplicada vía clases */
+         /*   */
          .job-detail-content {
-             /* Clases base añadidas directamente en HTML: transition-all duration-500 ease-in-out opacity-0 translate-x-4 */
+             /*  transition-all duration-500 ease-in-out opacity-0 translate-x-4 */
          }
 
-         /* Estilo del botón de pestaña activo */
+         /*  botón */
          .job-tab-button.active {
-             background-color: #0284c7; /* bg-sky-600 */
-             color: #ffffff; /* text-white */
+             background-color: #0284c7;  
+             color: #ffffff;  
          }
          .dark .job-tab-button.active {
-             background-color: #0ea5e9; /* dark:bg-sky-500 */
+             background-color: #0ea5e9;  
          }
 
     </style>
@@ -152,7 +153,7 @@
 
         <header class="bg-slate-800 dark:bg-slate-900 text-white p-6 md:p-8 text-center">
             <h1 class="text-3xl md:text-4xl font-bold">JONATHAN LLORET</h1>
-            <p class="text-lg md:text-xl text-slate-300 dark:text-slate-400 mt-1">CONTACT CENTRE SPECIALIST - LEARNING DEVELOPER</p>
+            <p class="text-lg md:text-xl text-slate-300 dark:text-slate-400 mt-1">Contact centre specialist | Learning developer</p>
             <div class="mt-4 text-sm md:text-base text-slate-400 dark:text-slate-500 flex flex-wrap justify-center gap-x-4 gap-y-2">
                 <span>
                     <a 
@@ -534,7 +535,7 @@
         // Execute script after DOM is loaded
         document.addEventListener('DOMContentLoaded', (event) => {
 
-            // --- Dark Mode Logic ---
+            // --- Dark Mode (thank you gemini) ---
             const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
             const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
             const themeToggleButton = document.getElementById('theme-toggle');
@@ -570,7 +571,7 @@
             }
 
 
-            // --- Collapsible Section Logic ---
+            // --- Collapsibles ---
             const mainHeaders = document.querySelectorAll('.collapsible-header');
             mainHeaders.forEach(header => {
                 const content = header.nextElementSibling; 
@@ -601,13 +602,13 @@
             });
 
 
-            // --- Job Tab Logic ---
-             // (Updated sequential animation logic)
+            // --- Job Tab  ---
+             // ( sequential animation )
             const jobMenu = document.querySelector('.job-menu');
             const jobDetailContents = document.querySelectorAll('.job-detail-content');
             const jobTabButtons = document.querySelectorAll('.job-tab-button');
             let activeJobTargetId = null;
-            const animationDuration = 500; // Match CSS transition duration
+            const animationDuration = 500; 
 
             if (jobMenu) {
                 jobMenu.addEventListener('click', (e) => {
@@ -620,7 +621,7 @@
                         const previouslyActiveButton = document.querySelector('.job-tab-button.active');
                         const previouslyActiveContent = activeJobTargetId ? document.getElementById(activeJobTargetId) : null;
 
-                        // If clicking the currently active tab to hide it
+                       
                         if (targetId === activeJobTargetId) {
                             if (targetContent) {
                                 targetContent.classList.remove('opacity-100', 'translate-x-0'); // Start fade out
@@ -640,7 +641,7 @@
                                 previouslyActiveButton.classList.remove('active');
                                 previouslyActiveButton.setAttribute('aria-selected', 'false');
                             }
-                            // Function to show new content
+                            // show new content
                             const showNewContent = () => {
                                 if (targetContent) {
                                     targetContent.classList.remove('hidden'); // Remove hidden first
@@ -667,7 +668,7 @@
                                 }
                             };
 
-                            // Fade out previous content (if any)
+                            // Fade out previous 
                             if (previouslyActiveContent) {
                                 previouslyActiveContent.classList.remove('opacity-100', 'translate-x-0');
                                 previouslyActiveContent.classList.add('opacity-0', 'translate-x-4');
@@ -677,7 +678,7 @@
                                     showNewContent(); // Show new content after hiding old
                                 }, animationDuration);
                             }
-                            // If there was no previously active content, just fade in the new one
+                            // If there was none
                             else {
                                  showNewContent();
                             }
@@ -686,8 +687,8 @@
                 });
             }
 
-        }); // End DOMContentLoaded
+        });  
     </script>
 
 </body>
-</html>
+</html>   
